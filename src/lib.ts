@@ -16,6 +16,7 @@ function trim(n: number): string {
 /** Percentage with sensible precision (0.407 -> "41%", 0.0026 -> "0.3%"). */
 export function pct(fraction: number, dp = 0): string {
   const v = fraction * 100;
+  if (v === 0) return "0%";
   const digits = v < 1 ? 1 : dp;
   return `${v.toFixed(digits)}%`;
 }

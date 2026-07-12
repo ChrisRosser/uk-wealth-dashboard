@@ -392,14 +392,69 @@ h1 {
 
 .tax-breakdown h3 {
   font-size: 1rem;
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.3rem;
+}
+
+.tax-breakdown-note {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.tax-bills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.tax-bill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.tax-bill-them {
+  border-color: var(--danger);
+}
+
+.tax-bill-head {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.tax-bill-them .tax-bill-head {
+  color: var(--danger);
+}
+
+.tax-bill-them .tax-row-total .tax-row-pct {
+  color: var(--danger);
+}
+
+.tax-bill-wealth {
+  margin: 0.7rem 0 0;
+  font-size: 0.95rem;
+}
+
+.tax-bill-wealth strong {
+  color: var(--accent-strong);
+}
+
+.tax-bill-them .tax-bill-wealth strong {
+  color: var(--danger);
+}
+
+.tax-bill-foot {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .tax-breakdown ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-width: 420px;
 }
 
 .tax-row {
