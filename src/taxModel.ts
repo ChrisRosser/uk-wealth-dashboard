@@ -14,8 +14,9 @@ export interface TaxBreakdown {
 }
 
 export interface HouseholdOpts {
-  /** % of wealth that is invested / income-generating (rest = home + pension). */
-  investedSharePct?: number;
+  /** Income-generating (taxable) wealth in £ — e.g. investments outside a
+   *  pension. Home and pension generate no annual taxable income. */
+  investedWealthGbp?: number;
   /** annual return on that invested wealth. */
   economicReturnPct?: number;
 }
@@ -116,7 +117,7 @@ export function taxForHousehold(
   opts: HouseholdOpts = {}
 ): TaxBreakdown {
   const b = t.billionaire;
-  const investedShare = opts.investedSharePct ?? 0;
+  const investedWealth = opts.investedWealthGbp ?? 0;
   const returnPct = opts.economicReturnPct ?? b.economicReturnPct;
 
   const it = incomeTax(income, t.incomeTax2025_26);
@@ -126,9 +127,8 @@ export function taxForHousehold(
   const vatAndDuties = income * (interp(income, xs, t.quintiles.indirectPctGross) / 100);
   const councilTax = income * (interp(income, xs, t.quintiles.councilPctGross) / 100);
 
-  // Wealth marked as "invested" generates capital income, taxed exactly like
-  // the billionaire's. Home + pension (the rest) generates none. Default 0%.
-  const investedWealth = wealth * (investedShare / 100);
+  // Invested wealth generates capital income, taxed exactly like the
+  // billionaire's. Home + pension generate none.
   const realisedTaxable = investedWealth * (b.realisedTaxableYieldPct / 100);
   const gains = realisedTaxable * (b.realisedGainsSharePct / 100);
   const dividends = realisedTaxable - gains;

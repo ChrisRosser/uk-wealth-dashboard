@@ -327,39 +327,63 @@ h1 {
 .tax-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem 1.25rem;
+  gap: 1.5rem;
   margin-bottom: 1.75rem;
-  max-width: 640px;
+  max-width: 720px;
+  align-items: start;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   .tax-inputs {
     grid-template-columns: 1fr;
   }
 }
 
-.tax-inputs label,
-.tax-inputs .tax-fixed,
-.tax-inputs .tax-field {
-  display: block;
+.tax-side {
   min-width: 0;
 }
 
-.tax-invested {
-  margin-top: 0.5rem;
+.tax-side-head {
+  margin: 0 0 0.9rem;
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
-.tax-invested input[type="range"] {
-  width: 100%;
-  accent-color: var(--accent);
-  cursor: pointer;
+.tax-side-bill .tax-side-head {
+  color: var(--danger);
 }
 
-.tax-invested-note {
+.tax-mfield {
   display: block;
-  font-size: 0.78rem;
+  min-width: 0;
+  margin-bottom: 0.7rem;
+}
+
+.tax-inputs .tax-fixed {
+  display: block;
+  min-width: 0;
+  margin-bottom: 0.7rem;
+}
+
+.tax-inputs label > span,
+.tax-mfield > span {
+  display: block;
+  font-size: 0.8rem;
   color: var(--muted);
-  margin-top: 0.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.tax-net {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+}
+
+.tax-net strong {
+  color: var(--accent-strong);
+}
+
+.tax-net span {
+  color: var(--muted);
 }
 
 .tax-inputs label > span,

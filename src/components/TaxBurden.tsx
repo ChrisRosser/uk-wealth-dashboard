@@ -32,21 +32,27 @@ function useNumber(initial: number) {
 
 export default function TaxBurden() {
   const income = useNumber(35_000);
-  const wealth = useNumber(294_000);
+  const pension = useNumber(100_000);
+  const investments = useNumber(20_000);
+  const house = useNumber(290_000);
+  const mortgage = useNumber(116_000);
   const [returnPct, setReturnPct] = useState(t.billionaire.economicReturnPct);
-  const [investedPct, setInvestedPct] = useState(0);
   const b = t.billionaire;
   const cfg = t.incomeTax2025_26;
 
+  const investedWealth = investments.value ?? 0;
+  const netWealth =
+    (pension.value ?? 0) + investedWealth + (house.value ?? 0) - (mortgage.value ?? 0);
+
   const you = useMemo(
     () =>
-      income.value != null && wealth.value != null
-        ? taxForHousehold(income.value, wealth.value, t, {
-            investedSharePct: investedPct,
+      income.value != null
+        ? taxForHousehold(income.value, netWealth, t, {
+            investedWealthGbp: investedWealth,
             economicReturnPct: returnPct,
           })
         : null,
-    [income.value, wealth.value, investedPct, returnPct]
+    [income.value, netWealth, investedWealth, returnPct]
   );
   const bill = useMemo(() => billionaire(t, returnPct), [returnPct]);
 
@@ -67,15 +73,14 @@ export default function TaxBurden() {
           const inc = income.value;
           const its = incomeTaxSteps(inc, cfg);
           const nis = niSteps(inc, cfg.ni);
-          const investedWealth = (wealth.value ?? 0) * (investedPct / 100);
           const yRealised = investedWealth * (b.realisedTaxableYieldPct / 100);
           const yGains = yRealised * (b.realisedGainsSharePct / 100);
           const yDivs = yRealised - yGains;
           return [
             { label: "Income tax", amount: you.incomeTax, detail: its.taxable <= 0 ? `Income is below the ${gbp(its.allowance)} personal allowance.` : `${gbp(its.taxable)} taxable after the ${gbp(its.allowance)} allowance → ${fmtSteps(its.steps)}.` },
             { label: "National Insurance", amount: you.nationalInsurance, detail: nis.length ? `${fmtSteps(nis)} on earnings above the ${gbp(cfg.ni.primaryThreshold)} threshold.` : `Income is below the ${gbp(cfg.ni.primaryThreshold)} NI threshold.` },
-            { label: "Capital gains tax", amount: you.capitalGainsTax, detail: you.capitalGainsTax > 0 ? `${b.cgtRatePct}% × ${gbp(yGains)} — on gains from your ${gbp(investedWealth)} of invested wealth.` : "None — your wealth is treated as home & pension. Use the invested-wealth slider to change this." },
-            { label: "Dividend tax", amount: you.dividendTax, detail: you.dividendTax > 0 ? `${b.dividendRatePct}% × ${gbp(yDivs)} — on dividends from your invested wealth.` : "None — see the invested-wealth slider under your wealth." },
+            { label: "Capital gains tax", amount: you.capitalGainsTax, detail: you.capitalGainsTax > 0 ? `${b.cgtRatePct}% × ${gbp(yGains)} — on gains from your ${gbp(investedWealth)} of investments.` : "None — only investments are taxed; your pension and home are not." },
+            { label: "Dividend tax", amount: you.dividendTax, detail: you.dividendTax > 0 ? `${b.dividendRatePct}% × ${gbp(yDivs)} — on dividends from your investments.` : "None — only investments generate taxable dividends." },
             { label: "VAT & duties", amount: you.vatAndDuties, detail: `≈${pct(you.vatAndDuties / inc)} of income — the ONS rate for a household at your income.` },
             { label: "Council tax", amount: you.councilTax, detail: `≈${pct(you.councilTax / inc)} of income — the ONS rate for your income.` },
           ];
@@ -85,74 +90,49 @@ export default function TaxBurden() {
   return (
     <section className="tax" aria-label="Your tax burden compared with a billionaire">
       <div className="tax-inputs">
-        <label>
-          <span>Your annual income</span>
-          <div className="wdys-input">
-            <span className="wdys-prefix">£</span>
-            <input
-              inputMode="numeric"
-              value={income.raw}
-              onChange={(e) => income.setRaw(e.target.value)}
-              aria-label="Your annual income in pounds"
-            />
-          </div>
-        </label>
-
-        <div className="tax-fixed">
-          <span className="tax-fixed-label">
-            Billionaire income <em>{returnPct}% / yr</em>
-          </span>
-          <div className="wdys-input wdys-input-locked">
-            <span className="wdys-prefix">£</span>
-            <span className="tax-fixed-val">{gbp(bill.economicIncome).slice(1)}</span>
-          </div>
-          <div className="tax-return">
-            <input
-              type="range"
-              min={8}
-              max={15}
-              step={1}
-              value={returnPct}
-              onChange={(e) => setReturnPct(Number(e.target.value))}
-              aria-label="Assumed annual return on the billionaire's wealth"
-            />
-          </div>
+        <div className="tax-side">
+          <p className="tax-side-head">You</p>
+          <MoneyField label="Annual income" field={income} />
+          <MoneyField label="Pension pot" field={pension} />
+          <MoneyField label="Investments (ISAs, shares)" field={investments} />
+          <MoneyField label="House value" field={house} />
+          <MoneyField label="Mortgage owed" field={mortgage} />
+          <p className="tax-net">
+            Net wealth <strong>{gbp(netWealth)}</strong>
+            <span> · {gbp(investedWealth)} taxable (investments only)</span>
+          </p>
         </div>
 
-        <div className="tax-field">
-          <span className="tax-fixed-label">Your household wealth</span>
-          <div className="wdys-input">
-            <span className="wdys-prefix">£</span>
-            <input
-              inputMode="numeric"
-              value={wealth.raw}
-              onChange={(e) => wealth.setRaw(e.target.value)}
-              aria-label="Your household wealth in pounds"
-            />
-          </div>
-          <div className="tax-invested">
-            <input
-              type="range"
-              min={0}
-              max={100}
-              step={5}
-              value={investedPct}
-              onChange={(e) => setInvestedPct(Number(e.target.value))}
-              aria-label="Share of your wealth that is invested and income-generating"
-            />
-            <span className="tax-invested-note">
-              {investedPct}% invested (income-generating)
+        <div className="tax-side tax-side-bill">
+          <p className="tax-side-head">The poorest billionaire</p>
+          <div className="tax-fixed">
+            <span className="tax-fixed-label">
+              Income <em>{returnPct}% / yr</em>
             </span>
+            <div className="wdys-input wdys-input-locked">
+              <span className="wdys-prefix">£</span>
+              <span className="tax-fixed-val">{gbp(bill.economicIncome).slice(1)}</span>
+            </div>
+            <div className="tax-return">
+              <input
+                type="range"
+                min={8}
+                max={15}
+                step={1}
+                value={returnPct}
+                onChange={(e) => setReturnPct(Number(e.target.value))}
+                aria-label="Assumed annual return on the billionaire's wealth"
+              />
+            </div>
           </div>
-        </div>
-
-        <div className="tax-fixed">
-          <span className="tax-fixed-label">
-            Billionaire wealth <em>fixed</em>
-          </span>
-          <div className="wdys-input wdys-input-locked">
-            <span className="wdys-prefix">£</span>
-            <span className="tax-fixed-val">{gbp(b.wealthGbp).slice(1)}</span>
+          <div className="tax-fixed">
+            <span className="tax-fixed-label">
+              Wealth <em>fixed</em>
+            </span>
+            <div className="wdys-input wdys-input-locked">
+              <span className="wdys-prefix">£</span>
+              <span className="tax-fixed-val">{gbp(b.wealthGbp).slice(1)}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -170,10 +150,7 @@ export default function TaxBurden() {
           <div className="tax-col">
             <p className="tax-col-title">You</p>
             <p className="tax-big">{pct(you.pctOfIncome)}</p>
-            <p className="tax-sub">
-              of your {investedPct > 0 ? "(economic) " : ""}income goes in tax
-              each year
-            </p>
+            <p className="tax-sub">of your income goes in tax each year</p>
             {you.pctOfWealth != null && (
               <p className="tax-wealth">
                 = <strong>{pct(you.pctOfWealth)}</strong> of everything you own
@@ -274,6 +251,29 @@ export default function TaxBurden() {
         </p>
       </details>
     </section>
+  );
+}
+
+function MoneyField({
+  label,
+  field,
+}: {
+  label: string;
+  field: { raw: string; setRaw: (s: string) => void };
+}) {
+  return (
+    <label className="tax-mfield">
+      <span>{label}</span>
+      <div className="wdys-input">
+        <span className="wdys-prefix">£</span>
+        <input
+          inputMode="numeric"
+          value={field.raw}
+          onChange={(e) => field.setRaw(e.target.value)}
+          aria-label={`${label} in pounds`}
+        />
+      </div>
+    </label>
   );
 }
 
