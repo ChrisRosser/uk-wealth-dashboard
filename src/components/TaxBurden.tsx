@@ -25,7 +25,8 @@ export default function TaxBurden() {
     [income.value, wealth.value]
   );
 
-  const bill = useMemo(() => billionaire(t), []);
+  const [returnPct, setReturnPct] = useState(t.billionaire.economicReturnPct);
+  const bill = useMemo(() => billionaire(t, returnPct), [returnPct]);
   const b = t.billionaire;
 
   return (
@@ -56,11 +57,22 @@ export default function TaxBurden() {
 
         <div className="tax-fixed">
           <span className="tax-fixed-label">
-            Billionaire income <em>fixed</em>
+            Billionaire income <em>{returnPct}% / yr</em>
           </span>
           <div className="wdys-input wdys-input-locked">
             <span className="wdys-prefix">£</span>
             <span className="tax-fixed-val">{gbp(bill.economicIncome).slice(1)}</span>
+          </div>
+          <div className="tax-return">
+            <input
+              type="range"
+              min={4}
+              max={50}
+              step={1}
+              value={returnPct}
+              onChange={(e) => setReturnPct(Number(e.target.value))}
+              aria-label="Assumed annual return on the billionaire's wealth"
+            />
           </div>
         </div>
 
@@ -87,6 +99,14 @@ export default function TaxBurden() {
           </div>
         </div>
       </div>
+
+      <p className="tax-return-note">
+        The return on wealth is adjustable — 8% is conservative. UBS puts
+        billionaire wealth up <strong>121% over the decade</strong> (~8%/yr,
+        10%/yr in 2015–20); Oxfam counts <strong>+$2tn (~15%)</strong> in 2024;
+        top founders, far more. A higher return doesn&apos;t raise their tax — it
+        just enlarges the untaxed, unrealised slice.
+      </p>
 
       {you && (
         <div className="tax-compare">

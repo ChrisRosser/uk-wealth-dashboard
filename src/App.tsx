@@ -13,6 +13,8 @@ export default function App() {
       "ons_etb",
       "advani_2023",
       "hmrc_income_tax_2025_26",
+      "ubs_billionaire",
+      "oxfam_takers",
     ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);

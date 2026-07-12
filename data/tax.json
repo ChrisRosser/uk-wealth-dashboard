@@ -129,7 +129,7 @@
   "billionaire": {
     "sourceId": "advani_2023",
     "wealthGbp": 1000000000,
-    "economicReturnPct": 6,
+    "economicReturnPct": 8,
     "realisedTaxableYieldPct": 2,
     "realisedGainsSharePct": 60,
     "cgtRatePct": 24,
@@ -138,6 +138,6 @@
     "annualSpendingGbp": 2000000,
     "vatEffectivePct": 7.7,
     "councilTaxGbp": 4000,
-    "note": "Illustrative and adjustable. £1bn earns ~6%/yr (~£60m), but only ~2% of wealth (~£20m) is realised as taxable income — 60% capital gains at 24%, 40% dividends at 39.35%, a blended ~30% that matches Advani et al. The rest of the gain is unrealised, so untaxed."
+    "note": "Illustrative and adjustable. 8%/yr is conservative: UBS puts billionaire wealth up 121% over the decade (~8%/yr, 10%/yr in 2015-20) and Oxfam counts +$2tn (~15%) in 2024. Only ~2% of wealth (~£20m) is realised as taxable income — 60% capital gains at 24%, 40% dividends at 39.35%, a blended ~30% matching Advani et al. The rest of the gain is unrealised, so untaxed — raising the return only widens that untaxed slice."
   }
 }

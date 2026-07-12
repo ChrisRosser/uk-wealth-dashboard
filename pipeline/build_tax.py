@@ -173,7 +173,7 @@ def build() -> None:
         "billionaire": {
             "sourceId": "advani_2023",
             "wealthGbp": 1_000_000_000,
-            "economicReturnPct": 6,           # total annual return incl. unrealised
+            "economicReturnPct": 8,           # total annual return incl. unrealised
             "realisedTaxableYieldPct": 2,     # realised, taxable income as % wealth
             "realisedGainsSharePct": 60,      # of realised income; the rest dividends
             "cgtRatePct": 24,                 # 2025/26 higher-rate CGT (GOV.UK)
@@ -182,11 +182,13 @@ def build() -> None:
             "annualSpendingGbp": 2_000_000,   # lifestyle spend subject to VAT
             "vatEffectivePct": 7.7,           # ONS top-quintile VAT as % of spend
             "councilTaxGbp": 4000,            # one top-band home (illustrative)
-            "note": "Illustrative and adjustable. £1bn earns ~6%/yr (~£60m), but "
-                    "only ~2% of wealth (~£20m) is realised as taxable income — "
-                    "60% capital gains at 24%, 40% dividends at 39.35%, a blended "
-                    "~30% that matches Advani et al. The rest of the gain is "
-                    "unrealised, so untaxed.",
+            "note": "Illustrative and adjustable. 8%/yr is conservative: UBS puts "
+                    "billionaire wealth up 121% over the decade (~8%/yr, 10%/yr "
+                    "in 2015-20) and Oxfam counts +$2tn (~15%) in 2024. Only ~2% "
+                    "of wealth (~£20m) is realised as taxable income — 60% capital "
+                    "gains at 24%, 40% dividends at 39.35%, a blended ~30% "
+                    "matching Advani et al. The rest of the gain is unrealised, so "
+                    "untaxed — raising the return only widens that untaxed slice.",
         },
     }
 

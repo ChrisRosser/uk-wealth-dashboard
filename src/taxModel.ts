@@ -116,10 +116,13 @@ export function taxForHousehold(income: number, wealth: number, t: TaxData): Tax
  * The "poorest billionaire" benchmark, built bottom-up from explicit
  * assumptions so it produces the SAME line items as a normal household bill.
  */
-export function billionaire(t: TaxData): BillionaireResult {
+export function billionaire(
+  t: TaxData,
+  economicReturnPct: number = t.billionaire.economicReturnPct
+): BillionaireResult {
   const b = t.billionaire;
   const wealth = b.wealthGbp;
-  const economicIncome = wealth * (b.economicReturnPct / 100);
+  const economicIncome = wealth * (economicReturnPct / 100);
   const realisedTaxable = wealth * (b.realisedTaxableYieldPct / 100);
 
   const gains = realisedTaxable * (b.realisedGainsSharePct / 100);

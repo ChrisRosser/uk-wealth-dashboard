@@ -60,5 +60,19 @@
     "publisher": "GOV.UK / HMRC",
     "licence": "Open Government Licence v3.0",
     "url": "https://www.gov.uk/income-tax-rates"
+  },
+  "ubs_billionaire": {
+    "title": "Billionaire Ambitions Report — billionaire wealth +121% over the decade to $14tn (~8%/yr; 10%/yr 2015-20)",
+    "publisher": "UBS",
+    "published": "2024",
+    "licence": "Cite with attribution.",
+    "url": "https://www.ubs.com/global/en/media/display-page-ndp/en-20251204-billionaire-ambitions-report-2025.html"
+  },
+  "oxfam_takers": {
+    "title": "Takers Not Makers — billionaire wealth grew by $2 trillion (~15%) in 2024",
+    "publisher": "Oxfam",
+    "published": "2025-01",
+    "licence": "Cite with attribution.",
+    "url": "https://www.oxfam.org/en/press-releases/billionaire-wealth-surges-2-trillion-2024-three-times-faster-year-while-number"
   }
 }

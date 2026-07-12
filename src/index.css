@@ -366,6 +366,28 @@ h1 {
   font-variant-numeric: tabular-nums;
 }
 
+.tax-return {
+  margin-top: 0.5rem;
+}
+
+.tax-return input[type="range"] {
+  width: 100%;
+  accent-color: var(--danger);
+  cursor: pointer;
+}
+
+.tax-return-note {
+  margin: 0 0 1.75rem;
+  max-width: 640px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.tax-return-note strong {
+  color: var(--text);
+}
+
 .tax-compare {
   display: flex;
   align-items: stretch;
