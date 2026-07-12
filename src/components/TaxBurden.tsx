@@ -3,9 +3,9 @@ import { tax as t } from "../data";
 import { gbp, pct } from "../lib";
 import {
   billionaire,
+  effectiveRateCurve,
   incomeTaxSteps,
   niSteps,
-  ordinaryCurve,
   taxForHousehold,
   type TaxStep,
 } from "../taxModel";
@@ -199,7 +199,7 @@ export default function TaxBurden() {
       )}
 
       <TaxRateChart
-        ordinary={ordinaryCurve(t)}
+        curve={effectiveRateCurve(t, bill)}
         user={
           you && income.value != null
             ? { income: income.value, rate: you.pctOfIncome, label: "You" }
@@ -243,8 +243,10 @@ export default function TaxBurden() {
         <p className="tax-scope">
           Your income tax &amp; NI are computed from 2025/26 bands; VAT and
           council tax are imputed from ONS figures for a household at your
-          income. The chart line is ONS all-taxes as a share of gross income by
-          income quintile ({t.meta.period}).
+          income. The shaded band joins ONS all-taxes as a share of gross income
+          ({t.meta.period}, up to ~£100k) to Advani/Summers effective rates on
+          income and gains above that, ending at the billionaire benchmark —
+          different measures, but each a genuine effective rate.
         </p>
       </details>
     </section>

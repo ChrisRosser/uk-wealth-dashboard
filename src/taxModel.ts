@@ -178,3 +178,23 @@ export function ordinaryCurve(t: TaxData): [number, number][] {
     t.quintiles.allTaxesPctGross[i] / 100,
   ]);
 }
+
+/**
+ * One continuous effective-tax-rate curve across the whole income range:
+ *   - ONS all-taxes as a share of gross income (ordinary households), then
+ *   - Advani/Summers effective rates on remuneration at the top, then
+ *   - the billionaire endpoint.
+ * These are different tax scopes but each is a genuine effective rate, and they
+ * meet at ~36% near £100k. Returned sorted by income, rates as fractions.
+ */
+export function effectiveRateCurve(
+  t: TaxData,
+  bill: BillionaireResult
+): [number, number][] {
+  const pts: [number, number][] = [];
+  for (const [inc, r] of ordinaryCurve(t)) pts.push([inc, r]);
+  for (const p of t.topTailAdvani.points) pts.push([p[0], p[1] / 100]);
+  pts.push([bill.economicIncome, bill.pctOfEconomicIncome]);
+  pts.sort((a, b) => a[0] - b[0]);
+  return pts;
+}
