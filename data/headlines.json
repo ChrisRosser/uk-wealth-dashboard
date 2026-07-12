@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "generated": "2026-07-12",
+    "pipelineVersion": "1.0.0",
+    "period": "2020-04/2022-03",
+    "source": "ONS Wealth & Assets Survey Round 8 + fitted Pareto tail"
+  },
+  "figures": [
+    {
+      "id": "total_household_wealth_gb",
+      "label": "Total private household wealth (GB)",
+      "value": 13568000000000,
+      "valueDisplay": "£13.6 trillion",
+      "geography": "GB",
+      "unit": "household",
+      "basis": "survey",
+      "period": "2020-04/2022-03",
+      "sourceId": "ons_was_r8",
+      "note": "Great Britain only; excludes Northern Ireland."
+    },
+    {
+      "id": "top1_share",
+      "label": "Share held by the wealthiest 1%",
+      "geography": "GB",
+      "unit": "household",
+      "views": {
+        "survey": {
+          "value": 0.1,
+          "valueDisplay": "10%",
+          "sourceId": "ons_was_r8_bulletin"
+        },
+        "adjusted": {
+          "value": 0.23,
+          "valueDisplay": "23%",
+          "sourceId": "advani_2020"
+        }
+      },
+      "note": "The survey undercounts the top; fiscal-data adjustment more than doubles their measured share."
+    },
+    {
+      "id": "top01_share",
+      "label": "Share held by the wealthiest 0.1%",
+      "geography": "GB/UK",
+      "unit": "household",
+      "views": {
+        "survey": {
+          "value": 0.026,
+          "valueDisplay": "~3%",
+          "sourceId": "ons_pareto"
+        },
+        "adjusted": {
+          "value": 0.09,
+          "valueDisplay": "~9%",
+          "sourceId": "wid_uk"
+        }
+      },
+      "note": "Survey figure is a Pareto extrapolation of the ONS tail; fiscal-data (WID) puts it far higher — the gap IS the hidden wealth at the very top."
+    },
+    {
+      "id": "top10_share",
+      "label": "Share held by the wealthiest 10%",
+      "value": 0.4071,
+      "valueDisplay": "41%",
+      "geography": "GB",
+      "unit": "household",
+      "basis": "survey",
+      "sourceId": "ons_was_r8",
+      "note": "Computed from ONS aggregate wealth by decile."
+    },
+    {
+      "id": "bottom50_share",
+      "label": "Share held by the least wealthy 50%",
+      "value": 0.0982,
+      "valueDisplay": "~10%",
+      "geography": "GB",
+      "unit": "household",
+      "basis": "survey",
+      "sourceId": "ons_was_r8",
+      "note": "About the same slice the wealthiest 1% hold."
+    },
+    {
+      "id": "wealth_gini",
+      "label": "Wealth Gini (GB households)",
+      "value": 0.59,
+      "valueDisplay": "0.59",
+      "geography": "GB",
+      "unit": "household",
+      "basis": "survey",
+      "sourceId": "ons_was_r8",
+      "note": "Income Gini is ~0.36 — wealth is far more concentrated."
+    }
+  ]
+}

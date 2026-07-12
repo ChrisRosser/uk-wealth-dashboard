@@ -1,0 +1,43 @@
+{
+  "ons_was_r8": {
+    "title": "Total wealth: Wealth in Great Britain (Table 2.1-2.3), April 2020 to March 2022",
+    "publisher": "Office for National Statistics",
+    "published": "2025-01-24",
+    "licence": "Open Government Licence v3.0",
+    "url": "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/datasets/totalwealthwealthingreatbritain/july2006tojune2016andapril2014tomarch2022/totalwealthtables.xlsx",
+    "caveat": "OSR suspended this survey's accredited official statistics status in June 2025 over undercount/quality concerns."
+  },
+  "ons_was_r8_bulletin": {
+    "title": "Household total wealth in Great Britain: April 2020 to March 2022",
+    "publisher": "Office for National Statistics",
+    "published": "2025-01-24",
+    "licence": "Open Government Licence v3.0",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/bulletins/totalwealthingreatbritain/april2020tomarch2022"
+  },
+  "ons_pareto": {
+    "title": "Pareto tail fitted to ONS top-decile thresholds (top 0.1% not resolved by the survey)",
+    "publisher": "This project (derived from ONS data)",
+    "licence": "Derived; method documented in pipeline/build_data.py",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/bulletins/totalwealthingreatbritain/april2020tomarch2022"
+  },
+  "advani_2020": {
+    "title": "The UK's wealth distribution and characteristics of high-wealth households",
+    "authors": "Advani, Bangham & Leslie",
+    "publisher": "Resolution Foundation / Wealth Tax Commission",
+    "published": "2020-12",
+    "licence": "Cite with attribution; do not republish in full.",
+    "url": "https://www.resolutionfoundation.org/app/uploads/2020/12/The-UKs-wealth-distribution.pdf"
+  },
+  "wid_uk": {
+    "title": "United Kingdom — World Inequality Database",
+    "publisher": "WID.world",
+    "licence": "Check terms; attribution required.",
+    "url": "https://wid.world/country/united-kingdom/"
+  },
+  "osr_suspension": {
+    "title": "OSR suspend accreditation of Wealth and Assets Survey",
+    "publisher": "Office for Statistics Regulation",
+    "published": "2025-06",
+    "url": "https://osr.statisticsauthority.gov.uk/news/osr-suspend-accreditation-of-wealth-and-assets-survey/"
+  }
+}
