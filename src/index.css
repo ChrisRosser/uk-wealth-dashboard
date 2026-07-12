@@ -314,21 +314,56 @@ h1 {
 }
 
 .tax-inputs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
   margin-bottom: 1.75rem;
+  max-width: 640px;
 }
 
-.tax-inputs label {
+@media (max-width: 520px) {
+  .tax-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tax-inputs label,
+.tax-inputs .tax-fixed {
   display: block;
+  min-width: 0;
 }
 
-.tax-inputs label span {
+.tax-inputs label > span,
+.tax-fixed-label {
   display: block;
   font-size: 0.82rem;
   color: var(--muted);
   margin-bottom: 0.4rem;
+}
+
+.tax-fixed-label em {
+  font-style: normal;
+  color: var(--danger);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--danger);
+  border-radius: 5px;
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.4rem;
+}
+
+.wdys-input-locked {
+  border-style: dashed;
+  border-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 7%, transparent);
+}
+
+.tax-fixed-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--danger);
+  font-variant-numeric: tabular-nums;
 }
 
 .tax-compare {

@@ -53,6 +53,17 @@ export default function TaxBurden() {
             />
           </div>
         </label>
+
+        <div className="tax-fixed">
+          <span className="tax-fixed-label">
+            Billionaire income <em>fixed</em>
+          </span>
+          <div className="wdys-input wdys-input-locked">
+            <span className="wdys-prefix">£</span>
+            <span className="tax-fixed-val">{gbp(bill.economicIncome).slice(1)}</span>
+          </div>
+        </div>
+
         <label>
           <span>Your household wealth</span>
           <div className="wdys-input">
@@ -65,6 +76,16 @@ export default function TaxBurden() {
             />
           </div>
         </label>
+
+        <div className="tax-fixed">
+          <span className="tax-fixed-label">
+            Billionaire wealth <em>fixed</em>
+          </span>
+          <div className="wdys-input wdys-input-locked">
+            <span className="wdys-prefix">£</span>
+            <span className="tax-fixed-val">{gbp(b.wealthGbp).slice(1)}</span>
+          </div>
+        </div>
       </div>
 
       {you && (
