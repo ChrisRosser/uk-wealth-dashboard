@@ -1,11 +1,12 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { headlines, sources, resolveValue } from "./data";
 import type { Basis } from "./types";
 import WhereDoYouSit from "./components/WhereDoYouSit";
 import TaxBurden from "./components/TaxBurden";
 
 export default function App() {
-  const [basis, setBasis] = useState<Basis>("survey");
+  // Only the corrected (undercount-adjusted) figures are shown.
+  const basis: Basis = "adjusted";
 
   // Which sources are referenced by the shown figures + the tax panel.
   const usedSourceIds = useMemo(() => {
@@ -41,24 +42,9 @@ export default function App() {
         <section className="distribution">
           <h2>Who owns the wealth?</h2>
 
-          <div className="toggle" role="group" aria-label="Data basis">
-            <button
-              className={basis === "survey" ? "active" : ""}
-              onClick={() => setBasis("survey")}
-            >
-              Official survey
-            </button>
-            <button
-              className={basis === "adjusted" ? "active" : ""}
-              onClick={() => setBasis("adjusted")}
-            >
-              Adjusted for undercount
-            </button>
-          </div>
           <p className="toggle-note">
-            {basis === "survey"
-              ? "ONS Wealth & Assets Survey — accurate for most households, but it misses the very top."
-              : "Corrected using HMRC/Rich List data (Resolution Foundation, WID). The top's share jumps."}
+            Corrected for the survey&apos;s undercount of the very top, using
+            HMRC and Rich List data (Resolution Foundation, WID).
           </p>
 
           <div className="cards">
