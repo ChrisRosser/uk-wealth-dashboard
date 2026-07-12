@@ -1,8 +1,25 @@
 import { useMemo, useState } from "react";
 import { tax as t } from "../data";
 import { gbp, pct } from "../lib";
-import { billionaire, ordinaryCurve, taxForHousehold } from "../taxModel";
+import {
+  billionaire,
+  incomeTaxSteps,
+  niSteps,
+  ordinaryCurve,
+  taxForHousehold,
+  type TaxStep,
+} from "../taxModel";
 import TaxRateChart from "./TaxRateChart";
+
+interface BillRow {
+  label: string;
+  amount: number;
+  detail: string;
+}
+
+function fmtSteps(steps: TaxStep[]): string {
+  return steps.map((s) => `${Math.round(s.rate * 100)}% × ${gbp(s.base)}`).join(" + ");
+}
 
 function useNumber(initial: number) {
   const [raw, setRaw] = useState(String(initial));
@@ -28,6 +45,35 @@ export default function TaxBurden() {
   const [returnPct, setReturnPct] = useState(t.billionaire.economicReturnPct);
   const bill = useMemo(() => billionaire(t, returnPct), [returnPct]);
   const b = t.billionaire;
+  const cfg = t.incomeTax2025_26;
+
+  const bGains = bill.realisedTaxable * (b.realisedGainsSharePct / 100);
+  const bDivs = bill.realisedTaxable - bGains;
+  const billRows: BillRow[] = [
+    { label: "Income tax", amount: bill.incomeTax, detail: "No salary — a billionaire's income is investment returns, not wages." },
+    { label: "National Insurance", amount: bill.nationalInsurance, detail: "Capital gains and dividends are exempt from National Insurance." },
+    { label: "Capital gains tax", amount: bill.capitalGainsTax, detail: `${b.cgtRatePct}% × ${gbp(bGains)} — ${b.realisedGainsSharePct}% of the ${gbp(bill.realisedTaxable)} realised.` },
+    { label: "Dividend tax", amount: bill.dividendTax, detail: `${b.dividendRatePct}% × ${gbp(bDivs)} — ${100 - b.realisedGainsSharePct}% of the ${gbp(bill.realisedTaxable)} realised.` },
+    { label: "VAT & duties", amount: bill.vatAndDuties, detail: `${b.vatEffectivePct}% × ${gbp(b.annualSpendingGbp)} of lifestyle spending.` },
+    { label: "Council tax", amount: bill.councilTax, detail: `One top-band home ≈ ${gbp(b.councilTaxGbp)}.` },
+  ];
+
+  const youRows: BillRow[] =
+    you && income.value != null
+      ? (() => {
+          const inc = income.value;
+          const its = incomeTaxSteps(inc, cfg);
+          const nis = niSteps(inc, cfg.ni);
+          return [
+            { label: "Income tax", amount: you.incomeTax, detail: its.taxable <= 0 ? `Income is below the ${gbp(its.allowance)} personal allowance.` : `${gbp(its.taxable)} taxable after the ${gbp(its.allowance)} allowance → ${fmtSteps(its.steps)}.` },
+            { label: "National Insurance", amount: you.nationalInsurance, detail: nis.length ? `${fmtSteps(nis)} on earnings above the ${gbp(cfg.ni.primaryThreshold)} threshold.` : `Income is below the ${gbp(cfg.ni.primaryThreshold)} NI threshold.` },
+            { label: "Capital gains tax", amount: you.capitalGainsTax, detail: "No taxable gains assumed — a typical household's wealth is its home and pension." },
+            { label: "Dividend tax", amount: you.dividendTax, detail: "No taxable dividend income assumed." },
+            { label: "VAT & duties", amount: you.vatAndDuties, detail: `≈${pct(you.vatAndDuties / inc)} of income — the ONS rate for a household at your income.` },
+            { label: "Council tax", amount: you.councilTax, detail: `≈${pct(you.councilTax / inc)} of income — the ONS rate for your income.` },
+          ];
+        })()
+      : [];
 
   return (
     <section className="tax" aria-label="Your tax burden compared with a billionaire">
@@ -136,14 +182,7 @@ export default function TaxBurden() {
               base={income.value}
               wealthPct={you.pctOfWealth}
               total={you.total}
-              rows={[
-                { label: "Income tax", amount: you.incomeTax },
-                { label: "National Insurance", amount: you.nationalInsurance },
-                { label: "Capital gains tax", amount: you.capitalGainsTax },
-                { label: "Dividend tax", amount: you.dividendTax },
-                { label: "VAT & duties", amount: you.vatAndDuties },
-                { label: "Council tax", amount: you.councilTax },
-              ]}
+              rows={youRows}
             />
             <BillCard
               them
@@ -152,14 +191,7 @@ export default function TaxBurden() {
               base={bill.economicIncome}
               wealthPct={bill.pctOfWealth}
               total={bill.total}
-              rows={[
-                { label: "Income tax", amount: bill.incomeTax },
-                { label: "National Insurance", amount: bill.nationalInsurance },
-                { label: "Capital gains tax", amount: bill.capitalGainsTax },
-                { label: "Dividend tax", amount: bill.dividendTax },
-                { label: "VAT & duties", amount: bill.vatAndDuties },
-                { label: "Council tax", amount: bill.councilTax },
-              ]}
+              rows={billRows}
               foot="Wealth income pays no National Insurance or income tax; VAT and council tax are a rounding error against £1bn. Most of the gain is unrealised, so never taxed."
             />
           </div>
@@ -231,7 +263,7 @@ function BillCard({
 }: {
   title: string;
   owner: string;
-  rows: { label: string; amount: number }[];
+  rows: BillRow[];
   total: number;
   base: number;
   wealthPct: number | null;
@@ -243,7 +275,7 @@ function BillCard({
       <p className="tax-bill-head">{title}</p>
       <ul>
         {rows.map((r) => (
-          <Row key={r.label} label={r.label} amount={r.amount} base={base} />
+          <Row key={r.label} label={r.label} amount={r.amount} base={base} detail={r.detail} />
         ))}
         <Row label="Total" amount={total} base={base} total />
       </ul>
@@ -262,17 +294,35 @@ function Row({
   amount,
   base,
   total,
+  detail,
 }: {
   label: string;
   amount: number;
   base: number;
   total?: boolean;
+  detail?: string;
 }) {
+  const [open, setOpen] = useState(false);
+  const canExpand = !total && !!detail;
   return (
     <li className={total ? "tax-row tax-row-total" : "tax-row"}>
-      <span>{label}</span>
+      <span className="tax-row-label">
+        {canExpand && (
+          <button
+            type="button"
+            className="tax-row-toggle"
+            aria-expanded={open}
+            aria-label={`${open ? "Hide" : "Show"} how ${label} is calculated`}
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? "−" : "+"}
+          </button>
+        )}
+        {label}
+      </span>
       <span className="tax-row-amt">{gbp(amount)}</span>
       <span className="tax-row-pct">{pct(amount / base)}</span>
+      {open && detail && <span className="tax-row-detail">{detail}</span>}
     </li>
   );
 }

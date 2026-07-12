@@ -27,40 +27,59 @@ export interface BillionaireResult {
   pctOfWealth: number;
 }
 
-/** UK income tax (England 2025/26) with personal-allowance taper. */
-export function incomeTax(gross: number, cfg: TaxData["incomeTax2025_26"]): number {
+/** A single "rate × base" slice of a tax calculation, for display. */
+export interface TaxStep {
+  rate: number;
+  base: number;
+}
+
+/** UK income tax (England 2025/26) broken into bands, with PA taper. */
+export function incomeTaxSteps(
+  gross: number,
+  cfg: TaxData["incomeTax2025_26"]
+): { allowance: number; taxable: number; steps: TaxStep[] } {
   let allowance = cfg.personalAllowance;
   if (gross > cfg.paTaperStart) {
-    const taper = Math.min(allowance, (gross - cfg.paTaperStart) / 2);
-    allowance -= taper;
+    allowance = Math.max(0, allowance - (gross - cfg.paTaperStart) / 2);
   }
   const taxable = Math.max(0, gross - allowance);
 
-  // Band thresholds in the JSON are stated on GROSS income; convert the basic-
-  // rate band so we tax `taxable` correctly regardless of allowance taper.
-  const basicTop = cfg.bands[1].threshold - cfg.personalAllowance; // 50270-12570
-  const higherTop = cfg.bands[2].threshold - cfg.personalAllowance; // 125140-12570
+  // Band thresholds are stated on GROSS income; shift to the taxable base.
+  const basicTop = cfg.bands[1].threshold - cfg.personalAllowance;
+  const higherTop = cfg.bands[2].threshold - cfg.personalAllowance;
 
-  let tax = 0;
-  tax += Math.min(taxable, basicTop) * cfg.bands[0].rate;
-  if (taxable > basicTop) {
-    tax += (Math.min(taxable, higherTop) - basicTop) * cfg.bands[1].rate;
-  }
-  if (taxable > higherTop) {
-    tax += (taxable - higherTop) * cfg.bands[2].rate;
-  }
-  return tax;
+  const steps: TaxStep[] = [];
+  const basic = Math.min(taxable, basicTop);
+  if (basic > 0) steps.push({ rate: cfg.bands[0].rate, base: basic });
+  if (taxable > basicTop)
+    steps.push({ rate: cfg.bands[1].rate, base: Math.min(taxable, higherTop) - basicTop });
+  if (taxable > higherTop)
+    steps.push({ rate: cfg.bands[2].rate, base: taxable - higherTop });
+  return { allowance, taxable, steps };
 }
 
-/** Employee Class 1 National Insurance, 2025/26. */
-export function nationalInsurance(gross: number, ni: TaxData["incomeTax2025_26"]["ni"]): number {
-  if (gross <= ni.primaryThreshold) return 0;
+export function incomeTax(gross: number, cfg: TaxData["incomeTax2025_26"]): number {
+  return incomeTaxSteps(gross, cfg).steps.reduce((s, b) => s + b.base * b.rate, 0);
+}
+
+/** Employee Class 1 National Insurance, 2025/26, broken into bands. */
+export function niSteps(
+  gross: number,
+  ni: TaxData["incomeTax2025_26"]["ni"]
+): TaxStep[] {
+  if (gross <= ni.primaryThreshold) return [];
   const main = Math.min(gross, ni.upperEarningsLimit) - ni.primaryThreshold;
-  let contrib = main * ni.mainRate;
-  if (gross > ni.upperEarningsLimit) {
-    contrib += (gross - ni.upperEarningsLimit) * ni.upperRate;
-  }
-  return contrib;
+  const steps: TaxStep[] = [{ rate: ni.mainRate, base: main }];
+  if (gross > ni.upperEarningsLimit)
+    steps.push({ rate: ni.upperRate, base: gross - ni.upperEarningsLimit });
+  return steps;
+}
+
+export function nationalInsurance(
+  gross: number,
+  ni: TaxData["incomeTax2025_26"]["ni"]
+): number {
+  return niSteps(gross, ni).reduce((s, b) => s + b.base * b.rate, 0);
 }
 
 /** Piecewise-linear interpolation with clamping at both ends. */

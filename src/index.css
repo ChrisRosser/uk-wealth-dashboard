@@ -534,6 +534,48 @@ h1 {
   font-size: 0.95rem;
 }
 
+.tax-row-label {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.tax-row-toggle {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: 0.5rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tax-row-toggle:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.tax-bill-them .tax-row-toggle:hover {
+  border-color: var(--danger);
+}
+
+.tax-row-detail {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding-top: 0.4rem;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
 .tax-row-amt {
   font-variant-numeric: tabular-nums;
   color: var(--text);
