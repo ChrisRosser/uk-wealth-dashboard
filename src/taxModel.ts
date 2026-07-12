@@ -8,8 +8,16 @@ export interface TaxBreakdown {
   vatAndDuties: number;
   councilTax: number;
   total: number;
+  economicIncome: number;
   pctOfIncome: number;
   pctOfWealth: number | null;
+}
+
+export interface HouseholdOpts {
+  /** % of wealth that is invested / income-generating (rest = home + pension). */
+  investedSharePct?: number;
+  /** annual return on that invested wealth. */
+  economicReturnPct?: number;
 }
 
 export interface BillionaireResult {
@@ -101,23 +109,35 @@ function interp(x: number, xs: number[], ys: number[]): number {
  * be derived from income alone, so they are imputed from ONS ETB rates for a
  * household at this income level (regressive: higher share for lower incomes).
  */
-export function taxForHousehold(income: number, wealth: number, t: TaxData): TaxBreakdown {
+export function taxForHousehold(
+  income: number,
+  wealth: number,
+  t: TaxData,
+  opts: HouseholdOpts = {}
+): TaxBreakdown {
+  const b = t.billionaire;
+  const investedShare = opts.investedSharePct ?? 0;
+  const returnPct = opts.economicReturnPct ?? b.economicReturnPct;
+
   const it = incomeTax(income, t.incomeTax2025_26);
   const ni = nationalInsurance(income, t.incomeTax2025_26.ni);
 
   const xs = t.quintiles.representativeIncomeGbp;
-  const vatPct = interp(income, xs, t.quintiles.indirectPctGross) / 100;
-  const councilPct = interp(income, xs, t.quintiles.councilPctGross) / 100;
-  const vatAndDuties = income * vatPct;
-  const councilTax = income * councilPct;
+  const vatAndDuties = income * (interp(income, xs, t.quintiles.indirectPctGross) / 100);
+  const councilTax = income * (interp(income, xs, t.quintiles.councilPctGross) / 100);
 
-  // Ordinary households' income is overwhelmingly wages, and their wealth is
-  // mostly their home and pension — neither generates taxable gains/dividends
-  // year to year. We therefore treat these as zero for a typical household.
-  const capitalGainsTax = 0;
-  const dividendTax = 0;
+  // Wealth marked as "invested" generates capital income, taxed exactly like
+  // the billionaire's. Home + pension (the rest) generates none. Default 0%.
+  const investedWealth = wealth * (investedShare / 100);
+  const realisedTaxable = investedWealth * (b.realisedTaxableYieldPct / 100);
+  const gains = realisedTaxable * (b.realisedGainsSharePct / 100);
+  const dividends = realisedTaxable - gains;
+  const capitalGainsTax = gains * (b.cgtRatePct / 100);
+  const dividendTax = dividends * (b.dividendRatePct / 100);
+  const investmentIncome = investedWealth * (returnPct / 100);
 
   const total = it + ni + capitalGainsTax + dividendTax + vatAndDuties + councilTax;
+  const economicIncome = income + investmentIncome;
   return {
     incomeTax: it,
     nationalInsurance: ni,
@@ -126,7 +146,8 @@ export function taxForHousehold(income: number, wealth: number, t: TaxData): Tax
     vatAndDuties,
     councilTax,
     total,
-    pctOfIncome: total / income,
+    economicIncome,
+    pctOfIncome: total / economicIncome,
     pctOfWealth: wealth > 0 ? total / wealth : null,
   };
 }

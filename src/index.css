@@ -339,9 +339,27 @@ h1 {
 }
 
 .tax-inputs label,
-.tax-inputs .tax-fixed {
+.tax-inputs .tax-fixed,
+.tax-inputs .tax-field {
   display: block;
   min-width: 0;
+}
+
+.tax-invested {
+  margin-top: 0.5rem;
+}
+
+.tax-invested input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.tax-invested-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
 }
 
 .tax-inputs label > span,
