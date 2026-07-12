@@ -96,15 +96,9 @@ h1 {
   margin: 0 0 1.25rem;
 }
 
-.tax-explainer {
-  margin: 3rem 0;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-}
-
-.tax-explainer h2 {
+.tax-share-head {
   font-size: 1.4rem;
-  margin: 0 0 0.75rem;
+  margin: 2.5rem 0 0.75rem;
 }
 
 .cards {

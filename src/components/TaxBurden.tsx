@@ -183,6 +183,16 @@ export default function TaxBurden() {
         </div>
       )}
 
+      <h3 className="tax-share-head">What share goes in tax?</h3>
+      <p className="tax-intro">
+        Income tax looks progressive — but it is only part of the story. Add
+        National Insurance, VAT, duties and council tax, and the burden as a
+        share of income is <strong>remarkably flat</strong>: the ONS finds the
+        poorest fifth pay about <strong>37%</strong> of their income in tax, the
+        richest fifth about <strong>36%</strong>. Then, at the very top, it{" "}
+        <em>falls to near zero</em>.
+      </p>
+
       <TaxRateChart
         curve={effectiveRateCurve(t, bill)}
         user={
