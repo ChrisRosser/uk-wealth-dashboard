@@ -281,7 +281,7 @@ function BillCard({
       </ul>
       {wealthPct != null && (
         <p className="tax-bill-wealth">
-          = <strong>{pct(wealthPct)}</strong> of {owner} wealth
+          = <strong>{pct(wealthPct)}</strong> of {owner} wealth per year
         </p>
       )}
       {foot && <p className="tax-bill-foot">{foot}</p>}
