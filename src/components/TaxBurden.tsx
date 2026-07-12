@@ -9,6 +9,7 @@ import {
   taxForHousehold,
   type TaxStep,
 } from "../taxModel";
+import type { NumberField } from "../useNumber";
 import TaxRateChart from "./TaxRateChart";
 
 interface BillRow {
@@ -21,25 +22,24 @@ function fmtSteps(steps: TaxStep[]): string {
   return steps.map((s) => `${Math.round(s.rate * 100)}% × ${gbp(s.base)}`).join(" + ");
 }
 
-function useNumber(initial: number) {
-  const [raw, setRaw] = useState(String(initial));
-  const value = useMemo(() => {
-    const n = Number(raw.replace(/[^0-9.]/g, ""));
-    return Number.isFinite(n) && n > 0 ? n : null;
-  }, [raw]);
-  return { raw, setRaw, value };
+interface Props {
+  income: NumberField;
+  investments: NumberField;
+  homeEquity: NumberField;
+  investedWealth: number;
+  netWealth: number;
 }
 
-export default function TaxBurden() {
-  const income = useNumber(35_000);
-  const investments = useNumber(20_000);
-  const homeEquity = useNumber(175_000);
+export default function TaxBurden({
+  income,
+  investments,
+  homeEquity,
+  investedWealth,
+  netWealth,
+}: Props) {
   const [returnPct, setReturnPct] = useState(t.billionaire.economicReturnPct);
   const b = t.billionaire;
   const cfg = t.incomeTax2025_26;
-
-  const investedWealth = investments.value ?? 0;
-  const netWealth = investedWealth + (homeEquity.value ?? 0);
 
   const you = useMemo(
     () =>

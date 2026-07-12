@@ -191,6 +191,21 @@ def build() -> None:
                     "matching Advani et al. The rest of the gain is unrealised, so "
                     "untaxed — raising the return only widens that untaxed slice.",
         },
+        # CURATED — national tax take + an illustrative "fair share" scenario.
+        "taxTake": {
+            "sourceId": "obr_receipts",
+            "currentReceiptsGbp": 1_139_000_000_000,      # 2024-25, OBR
+            "top01WealthShare": 0.09,                     # WID (top 0.1%)
+            "top01SourceId": "wid_uk",
+            "totalHouseholdWealthGbp": 13_568_000_000_000,
+            "note": "Illustrative. Most tax already comes from ordinary "
+                    "households paying about a third of their income. The "
+                    "shortfall is at the very top: this compares the tax the "
+                    "wealthiest 0.1% pay on the income their wealth earns with "
+                    "what they would pay at the median household's effective "
+                    "rate. Uses this dashboard's own top-rate and return "
+                    "assumptions, so treat it as illustrative, not a forecast.",
+        },
     }
 
     validate(tax)

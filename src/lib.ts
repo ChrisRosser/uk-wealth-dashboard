@@ -3,6 +3,7 @@ import type { Distribution } from "./types";
 /** Format a GBP amount compactly: £16,500 / £1.2m / £8.1bn. */
 export function gbp(value: number): string {
   const abs = Math.abs(value);
+  if (abs >= 1e12) return `£${trim(value / 1e12)}tn`;
   if (abs >= 1e9) return `£${trim(value / 1e9)}bn`;
   if (abs >= 1e6) return `£${trim(value / 1e6)}m`;
   if (abs >= 1e5) return `£${Math.round(value / 1000)}k`;

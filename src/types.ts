@@ -85,6 +85,14 @@ export interface TaxData {
     councilTaxGbp: number;
     note: string;
   };
+  taxTake: {
+    sourceId: string;
+    currentReceiptsGbp: number;
+    top01WealthShare: number;
+    top01SourceId: string;
+    totalHouseholdWealthGbp: number;
+    note: string;
+  };
 }
 
 export interface Distribution {

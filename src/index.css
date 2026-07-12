@@ -730,6 +730,71 @@ h1 {
   font-style: italic;
 }
 
+/* The UK's tax take */
+.taketake {
+  margin: 3rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.taketake h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.take-compare {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.take-col {
+  flex: 1 1 240px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.take-col-hi {
+  border-color: var(--accent-strong);
+}
+
+.take-label {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.take-big {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0.3rem 0 0;
+  line-height: 1;
+}
+
+.take-col-hi .take-big {
+  color: var(--accent-strong);
+}
+
+.take-sub {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.take-col-hi .take-sub strong {
+  color: var(--accent-strong);
+}
+
+.take-arrow {
+  align-self: center;
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+
 .sources h2 {
   font-size: 1.1rem;
 }

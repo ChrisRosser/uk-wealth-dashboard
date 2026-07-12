@@ -165,6 +165,15 @@ SOURCES = {
                "billionaire-wealth-surges-2-trillion-2024-three-times-faster-"
                "year-while-number",
     },
+    "obr_receipts": {
+        "title": "Public sector current receipts £1,139bn in 2024-25 "
+                 "(40.9% of national income)",
+        "publisher": "Office for Budget Responsibility",
+        "published": "2025",
+        "licence": "Cite with attribution.",
+        "url": "https://obr.uk/forecasts-in-depth/brief-guides-and-explainers/"
+               "public-finances/",
+    },
 }
 
 
