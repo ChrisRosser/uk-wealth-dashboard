@@ -91,45 +91,46 @@ export default function TaxBurden() {
         </div>
       )}
 
-      {you && (
+      {you && income.value != null && (
         <div className="tax-breakdown">
           <h3>The bills, broken down</h3>
           <p className="tax-breakdown-note">
-            Amounts are per year; percentages are of each one&apos;s income.
+            Same rows for both. Amounts are per year; percentages are of each
+            one&apos;s income.
           </p>
           <div className="tax-bills">
-            <div className="tax-bill">
-              <p className="tax-bill-head">You</p>
-              <ul>
-                <Row label="Income tax" amount={you.incomeTax} base={income.value!} />
-                <Row label="National Insurance" amount={you.nationalInsurance} base={income.value!} />
-                <Row label="VAT & duties (est.)" amount={you.vatAndDuties} base={income.value!} />
-                <Row label="Council tax (est.)" amount={you.councilTax} base={income.value!} />
-                <Row label="Total" amount={you.total} base={income.value!} total />
-              </ul>
-              {you.pctOfWealth != null && (
-                <p className="tax-bill-wealth">
-                  = <strong>{pct(you.pctOfWealth)}</strong> of your wealth
-                </p>
-              )}
-            </div>
-
-            <div className="tax-bill tax-bill-them">
-              <p className="tax-bill-head">The poorest billionaire</p>
-              <ul>
-                <Row label="Tax on income & gains" amount={bill.tax} base={bill.economicIncome} />
-                <Row label="National Insurance" amount={0} base={bill.economicIncome} />
-                <Row label="Total" amount={bill.tax} base={bill.economicIncome} total />
-              </ul>
-              <p className="tax-bill-wealth">
-                = <strong>{pct(bill.pctOfWealth)}</strong> of their wealth
-              </p>
-              <p className="tax-bill-foot">
-                Wealth income pays no NI; VAT, duties &amp; council tax are a
-                rounding error against £1bn. Most of the ~{gbp(bill.economicIncome)} gain
-                is unrealised, so it is never taxed at all.
-              </p>
-            </div>
+            <BillCard
+              title="You"
+              owner="your"
+              base={income.value}
+              wealthPct={you.pctOfWealth}
+              total={you.total}
+              rows={[
+                { label: "Income tax", amount: you.incomeTax },
+                { label: "National Insurance", amount: you.nationalInsurance },
+                { label: "Capital gains tax", amount: you.capitalGainsTax },
+                { label: "Dividend tax", amount: you.dividendTax },
+                { label: "VAT & duties", amount: you.vatAndDuties },
+                { label: "Council tax", amount: you.councilTax },
+              ]}
+            />
+            <BillCard
+              them
+              title="The poorest billionaire"
+              owner="their"
+              base={bill.economicIncome}
+              wealthPct={bill.pctOfWealth}
+              total={bill.total}
+              rows={[
+                { label: "Income tax", amount: bill.incomeTax },
+                { label: "National Insurance", amount: bill.nationalInsurance },
+                { label: "Capital gains tax", amount: bill.capitalGainsTax },
+                { label: "Dividend tax", amount: bill.dividendTax },
+                { label: "VAT & duties", amount: bill.vatAndDuties },
+                { label: "Council tax", amount: bill.councilTax },
+              ]}
+              foot="Wealth income pays no National Insurance or income tax; VAT and council tax are a rounding error against £1bn. Most of the gain is unrealised, so never taxed."
+            />
           </div>
         </div>
       )}
@@ -161,10 +162,20 @@ export default function TaxBurden() {
         <p>{b.note}</p>
         <ul>
           <li>Wealth: {gbp(b.wealthGbp)}</li>
-          <li>Total annual return (incl. unrealised): {b.economicReturnPct}% = {gbp(bill.economicIncome)}</li>
+          <li>Total annual return incl. unrealised: {b.economicReturnPct}% = {gbp(bill.economicIncome)}</li>
           <li>Realised, taxable income: {b.realisedTaxableYieldPct}% of wealth = {gbp(bill.realisedTaxable)}</li>
-          <li>Effective rate on that realised income: {b.effectiveRateOnRealisedPct}% (Advani et al.)</li>
-          <li>→ Tax paid ≈ {gbp(bill.tax)} — {pct(bill.pctOfWealth)} of wealth, {pct(bill.pctOfEconomicIncome)} of economic income</li>
+          <li>
+            Split {b.realisedGainsSharePct}% capital gains @ {b.cgtRatePct}%,{" "}
+            {100 - b.realisedGainsSharePct}% dividends @ {b.dividendRatePct}%
+          </li>
+          <li>
+            Salary {gbp(b.salaryGbp)} · lifestyle spend {gbp(b.annualSpendingGbp)}{" "}
+            (VAT ~{b.vatEffectivePct}%) · council tax {gbp(b.councilTaxGbp)}
+          </li>
+          <li>
+            → Total tax ≈ {gbp(bill.total)} — {pct(bill.pctOfWealth)} of wealth,{" "}
+            {pct(bill.pctOfEconomicIncome)} of economic income
+          </li>
         </ul>
         <p className="tax-scope">
           Your income tax &amp; NI are computed from 2025/26 bands; VAT and
@@ -174,6 +185,44 @@ export default function TaxBurden() {
         </p>
       </details>
     </section>
+  );
+}
+
+function BillCard({
+  title,
+  owner,
+  rows,
+  total,
+  base,
+  wealthPct,
+  them,
+  foot,
+}: {
+  title: string;
+  owner: string;
+  rows: { label: string; amount: number }[];
+  total: number;
+  base: number;
+  wealthPct: number | null;
+  them?: boolean;
+  foot?: string;
+}) {
+  return (
+    <div className={them ? "tax-bill tax-bill-them" : "tax-bill"}>
+      <p className="tax-bill-head">{title}</p>
+      <ul>
+        {rows.map((r) => (
+          <Row key={r.label} label={r.label} amount={r.amount} base={base} />
+        ))}
+        <Row label="Total" amount={total} base={base} total />
+      </ul>
+      {wealthPct != null && (
+        <p className="tax-bill-wealth">
+          = <strong>{pct(wealthPct)}</strong> of {owner} wealth
+        </p>
+      )}
+      {foot && <p className="tax-bill-foot">{foot}</p>}
+    </div>
   );
 }
 

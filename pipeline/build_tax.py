@@ -168,16 +168,25 @@ def build() -> None:
             ],
             "quarterOf3mPlusPaidAtMostPct": 12,
         },
-        # CURATED — "poorest billionaire" benchmark. Every assumption explicit.
+        # CURATED — "poorest billionaire" benchmark, built bottom-up so it has
+        # the SAME rows as a normal bill. Every assumption explicit.
         "billionaire": {
             "sourceId": "advani_2023",
             "wealthGbp": 1_000_000_000,
-            "economicReturnPct": 6,          # total annual return incl. unrealised
-            "realisedTaxableYieldPct": 2,    # realised, taxable income as % wealth
-            "effectiveRateOnRealisedPct": 30,  # Advani ~30% for £3m+ remuneration
-            "note": "Illustrative. £1bn earning ~6%/yr (~£60m) but only ~2% of "
-                    "wealth (~£20m) realised as taxable income, taxed at ~30% "
-                    "(Advani). Adjust the assumptions to test the result.",
+            "economicReturnPct": 6,           # total annual return incl. unrealised
+            "realisedTaxableYieldPct": 2,     # realised, taxable income as % wealth
+            "realisedGainsSharePct": 60,      # of realised income; the rest dividends
+            "cgtRatePct": 24,                 # 2025/26 higher-rate CGT (GOV.UK)
+            "dividendRatePct": 39.35,         # 2025/26 additional-rate dividend
+            "salaryGbp": 0,                   # wealth, not wages -> no income tax/NI
+            "annualSpendingGbp": 2_000_000,   # lifestyle spend subject to VAT
+            "vatEffectivePct": 7.7,           # ONS top-quintile VAT as % of spend
+            "councilTaxGbp": 4000,            # one top-band home (illustrative)
+            "note": "Illustrative and adjustable. £1bn earns ~6%/yr (~£60m), but "
+                    "only ~2% of wealth (~£20m) is realised as taxable income — "
+                    "60% capital gains at 24%, 40% dividends at 39.35%, a blended "
+                    "~30% that matches Advani et al. The rest of the gain is "
+                    "unrealised, so untaxed.",
         },
     }
 

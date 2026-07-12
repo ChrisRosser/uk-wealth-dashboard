@@ -131,7 +131,13 @@
     "wealthGbp": 1000000000,
     "economicReturnPct": 6,
     "realisedTaxableYieldPct": 2,
-    "effectiveRateOnRealisedPct": 30,
-    "note": "Illustrative. £1bn earning ~6%/yr (~£60m) but only ~2% of wealth (~£20m) realised as taxable income, taxed at ~30% (Advani). Adjust the assumptions to test the result."
+    "realisedGainsSharePct": 60,
+    "cgtRatePct": 24,
+    "dividendRatePct": 39.35,
+    "salaryGbp": 0,
+    "annualSpendingGbp": 2000000,
+    "vatEffectivePct": 7.7,
+    "councilTaxGbp": 4000,
+    "note": "Illustrative and adjustable. £1bn earns ~6%/yr (~£60m), but only ~2% of wealth (~£20m) is realised as taxable income — 60% capital gains at 24%, 40% dividends at 39.35%, a blended ~30% that matches Advani et al. The rest of the gain is unrealised, so untaxed."
   }
 }

@@ -3,6 +3,8 @@ import type { TaxData } from "./types";
 export interface TaxBreakdown {
   incomeTax: number;
   nationalInsurance: number;
+  capitalGainsTax: number;
+  dividendTax: number;
   vatAndDuties: number;
   councilTax: number;
   total: number;
@@ -14,10 +16,15 @@ export interface BillionaireResult {
   wealth: number;
   economicIncome: number; // total annual return incl. unrealised
   realisedTaxable: number;
-  tax: number;
+  incomeTax: number;
+  nationalInsurance: number;
+  capitalGainsTax: number;
+  dividendTax: number;
+  vatAndDuties: number;
+  councilTax: number;
+  total: number;
   pctOfEconomicIncome: number;
   pctOfWealth: number;
-  pctOfRealisedIncome: number;
 }
 
 /** UK income tax (England 2025/26) with personal-allowance taper. */
@@ -85,10 +92,18 @@ export function taxForHousehold(income: number, wealth: number, t: TaxData): Tax
   const vatAndDuties = income * vatPct;
   const councilTax = income * councilPct;
 
-  const total = it + ni + vatAndDuties + councilTax;
+  // Ordinary households' income is overwhelmingly wages, and their wealth is
+  // mostly their home and pension — neither generates taxable gains/dividends
+  // year to year. We therefore treat these as zero for a typical household.
+  const capitalGainsTax = 0;
+  const dividendTax = 0;
+
+  const total = it + ni + capitalGainsTax + dividendTax + vatAndDuties + councilTax;
   return {
     incomeTax: it,
     nationalInsurance: ni,
+    capitalGainsTax,
+    dividendTax,
     vatAndDuties,
     councilTax,
     total,
@@ -97,21 +112,40 @@ export function taxForHousehold(income: number, wealth: number, t: TaxData): Tax
   };
 }
 
-/** The "poorest billionaire" benchmark from explicit assumptions. */
+/**
+ * The "poorest billionaire" benchmark, built bottom-up from explicit
+ * assumptions so it produces the SAME line items as a normal household bill.
+ */
 export function billionaire(t: TaxData): BillionaireResult {
   const b = t.billionaire;
   const wealth = b.wealthGbp;
   const economicIncome = wealth * (b.economicReturnPct / 100);
   const realisedTaxable = wealth * (b.realisedTaxableYieldPct / 100);
-  const tax = realisedTaxable * (b.effectiveRateOnRealisedPct / 100);
+
+  const gains = realisedTaxable * (b.realisedGainsSharePct / 100);
+  const dividends = realisedTaxable - gains;
+
+  const it = incomeTax(b.salaryGbp, t.incomeTax2025_26);
+  const ni = nationalInsurance(b.salaryGbp, t.incomeTax2025_26.ni);
+  const capitalGainsTax = gains * (b.cgtRatePct / 100);
+  const dividendTax = dividends * (b.dividendRatePct / 100);
+  const vatAndDuties = b.annualSpendingGbp * (b.vatEffectivePct / 100);
+  const councilTax = b.councilTaxGbp;
+
+  const total = it + ni + capitalGainsTax + dividendTax + vatAndDuties + councilTax;
   return {
     wealth,
     economicIncome,
     realisedTaxable,
-    tax,
-    pctOfEconomicIncome: tax / economicIncome,
-    pctOfWealth: tax / wealth,
-    pctOfRealisedIncome: b.effectiveRateOnRealisedPct / 100,
+    incomeTax: it,
+    nationalInsurance: ni,
+    capitalGainsTax,
+    dividendTax,
+    vatAndDuties,
+    councilTax,
+    total,
+    pctOfEconomicIncome: total / economicIncome,
+    pctOfWealth: total / wealth,
   };
 }
 

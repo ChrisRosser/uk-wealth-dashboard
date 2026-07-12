@@ -75,7 +75,13 @@ export interface TaxData {
     wealthGbp: number;
     economicReturnPct: number;
     realisedTaxableYieldPct: number;
-    effectiveRateOnRealisedPct: number;
+    realisedGainsSharePct: number;
+    cgtRatePct: number;
+    dividendRatePct: number;
+    salaryGbp: number;
+    annualSpendingGbp: number;
+    vatEffectivePct: number;
+    councilTaxGbp: number;
     note: string;
   };
 }
