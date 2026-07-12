@@ -96,6 +96,17 @@ h1 {
   margin: 0 0 1.25rem;
 }
 
+.tax-explainer {
+  margin: 3rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.tax-explainer h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -293,7 +304,7 @@ h1 {
   margin: 1rem 0 0;
 }
 
-/* What share goes in tax? — leads the page, so no top divider */
+/* Tax calculator — leads the page directly under the intro, so no divider */
 .tax {
   margin: 1.5rem 0 3rem;
 }
