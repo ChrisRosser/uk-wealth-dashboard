@@ -16,7 +16,7 @@ const M = { top: 16, right: 20, bottom: 44, left: 44 };
 const PW = W - M.left - M.right;
 const PH = H - M.top - M.bottom;
 
-const X_MIN = 10_000;
+const X_MIN = 12_500;
 const X_MAX = 100_000_000;
 const Y_MAX = 0.45;
 
@@ -25,7 +25,7 @@ const lx = (v: number) =>
 const ly = (r: number) => M.top + (1 - r / Y_MAX) * PH;
 
 const X_TICKS = [
-  [10_000, "£10k"],
+  [12_500, "£12.5k"],
   [100_000, "£100k"],
   [1_000_000, "£1m"],
   [10_000_000, "£10m"],
