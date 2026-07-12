@@ -24,57 +24,63 @@ export default function App() {
   return (
     <div className="page">
       <header className="masthead">
-        <p className="kicker">Great Britain · Wealth &amp; Assets Survey</p>
-        <h1>Who owns the UK&apos;s wealth?</h1>
+        <p className="kicker">United Kingdom · wealth &amp; tax</p>
+        <h1>Who owns the UK&apos;s wealth — and who pays the tax?</h1>
         <p className="lede">
           There is roughly <strong>£13.6 trillion</strong> of private wealth in Great
-          Britain. It is not shared evenly. This dashboard is built entirely from
-          published ONS and academic data — every figure links to its source.
-        </p>
-
-        <div className="toggle" role="group" aria-label="Data basis">
-          <button
-            className={basis === "survey" ? "active" : ""}
-            onClick={() => setBasis("survey")}
-          >
-            Official survey
-          </button>
-          <button
-            className={basis === "adjusted" ? "active" : ""}
-            onClick={() => setBasis("adjusted")}
-          >
-            Adjusted for undercount
-          </button>
-        </div>
-        <p className="toggle-note">
-          {basis === "survey"
-            ? "ONS Wealth & Assets Survey — accurate for most households, but it misses the very top."
-            : "Corrected using HMRC/Rich List data (Resolution Foundation, WID). The top's share jumps."}
+          Britain, and the system taxes income from work far more heavily than
+          wealth. Start with your own numbers — every figure links to its source.
         </p>
       </header>
 
-      <main className="cards">
-        {headlines.figures.map((f) => {
-          const r = resolveValue(f, basis);
-          if (!r) return null;
-          return (
-            <article className="card" key={f.id}>
-              <p className="card-value">{r.valueDisplay}</p>
-              <p className="card-label">{f.label}</p>
-              {f.note && <p className="card-note">{f.note}</p>}
-              <p className="card-tags">
-                <span>{f.geography}</span>
-                <span>{f.unit}</span>
-                {f.views && <span>{basis}</span>}
-              </p>
-            </article>
-          );
-        })}
+      <main>
+        <TaxBurden />
+
+        <section className="distribution">
+          <h2>Who owns the wealth?</h2>
+
+          <div className="toggle" role="group" aria-label="Data basis">
+            <button
+              className={basis === "survey" ? "active" : ""}
+              onClick={() => setBasis("survey")}
+            >
+              Official survey
+            </button>
+            <button
+              className={basis === "adjusted" ? "active" : ""}
+              onClick={() => setBasis("adjusted")}
+            >
+              Adjusted for undercount
+            </button>
+          </div>
+          <p className="toggle-note">
+            {basis === "survey"
+              ? "ONS Wealth & Assets Survey — accurate for most households, but it misses the very top."
+              : "Corrected using HMRC/Rich List data (Resolution Foundation, WID). The top's share jumps."}
+          </p>
+
+          <div className="cards">
+            {headlines.figures.map((f) => {
+              const r = resolveValue(f, basis);
+              if (!r) return null;
+              return (
+                <article className="card" key={f.id}>
+                  <p className="card-value">{r.valueDisplay}</p>
+                  <p className="card-label">{f.label}</p>
+                  {f.note && <p className="card-note">{f.note}</p>}
+                  <p className="card-tags">
+                    <span>{f.geography}</span>
+                    <span>{f.unit}</span>
+                    {f.views && <span>{basis}</span>}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <WhereDoYouSit />
       </main>
-
-      <WhereDoYouSit />
-
-      <TaxBurden />
 
       <section className="sources">
         <h2>Sources</h2>
