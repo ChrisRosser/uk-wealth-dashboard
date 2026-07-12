@@ -191,9 +191,15 @@ export function effectiveRateCurve(
   t: TaxData,
   bill: BillionaireResult
 ): [number, number][] {
+  const reps = t.quintiles.representativeIncomeGbp;
+  const onsMax = reps[reps.length - 1];
   const pts: [number, number][] = [];
   for (const [inc, r] of ordinaryCurve(t)) pts.push([inc, r]);
-  for (const p of t.topTailAdvani.points) pts.push([p[0], p[1] / 100]);
+  // Only take Advani top-tail points clear of the ONS top quintile, so the two
+  // series don't collide near £100k (which caused a kink in the band).
+  for (const p of t.topTailAdvani.points) {
+    if (p[0] > onsMax * 1.5) pts.push([p[0], p[1] / 100]);
+  }
   pts.push([bill.economicIncome, bill.pctOfEconomicIncome]);
   pts.sort((a, b) => a[0] - b[0]);
   return pts;
