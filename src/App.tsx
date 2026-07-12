@@ -60,8 +60,9 @@ export default function App() {
           <h2>Who owns the wealth?</h2>
 
           <p className="toggle-note">
-            Corrected for the survey&apos;s undercount of the very top, using
-            HMRC and Rich List data (Resolution Foundation, WID).
+            The top-1% and top-0.1% shares are corrected for the survey&apos;s
+            undercount of the very wealthy (Resolution Foundation, WID); the
+            other figures are from the ONS survey.
           </p>
 
           <div className="cards">

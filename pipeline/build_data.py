@@ -359,8 +359,9 @@ def build() -> None:
                         "sourceId": "advani_2020",
                     },
                 },
-                "note": "The survey undercounts the top; fiscal-data "
-                        "adjustment more than doubles their measured share.",
+                "note": "The raw survey says 10%; correcting for its undercount "
+                        "of the very rich roughly doubles that (Resolution "
+                        "Foundation / Wealth Tax Commission).",
             },
             {
                 "id": "top01_share",
@@ -378,9 +379,9 @@ def build() -> None:
                         "sourceId": "wid_uk",
                     },
                 },
-                "note": "Survey figure is a Pareto extrapolation of the ONS "
-                        "tail; fiscal-data (WID) puts it far higher — the gap "
-                        "IS the hidden wealth at the very top.",
+                "note": "Estimated from fiscal data (WID); household surveys "
+                        "cannot resolve this tier. Roughly 60,000 people own "
+                        "about a tenth of all the wealth.",
             },
             {
                 "id": "top10_share",
@@ -398,7 +399,8 @@ def build() -> None:
                 "valueDisplay": f"~{bottom50*100:.0f}%",
                 "geography": "GB", "unit": "household", "basis": "survey",
                 "sourceId": "ons_was_r8",
-                "note": "About the same slice the wealthiest 1% hold.",
+                "note": "Half of all households share barely a tenth of the "
+                        "wealth — less than the wealthiest 1% alone hold.",
             },
             {
                 "id": "wealth_gini",
