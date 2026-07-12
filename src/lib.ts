@@ -5,7 +5,7 @@ export function gbp(value: number): string {
   const abs = Math.abs(value);
   if (abs >= 1e9) return `£${trim(value / 1e9)}bn`;
   if (abs >= 1e6) return `£${trim(value / 1e6)}m`;
-  if (abs >= 1e4) return `£${Math.round(value / 1000)}k`;
+  if (abs >= 1e5) return `£${Math.round(value / 1000)}k`;
   return `£${Math.round(value).toLocaleString("en-GB")}`;
 }
 

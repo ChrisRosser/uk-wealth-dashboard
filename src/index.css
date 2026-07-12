@@ -6,6 +6,7 @@
   --muted: #97a3c0;
   --accent: #6ea8fe;
   --accent-strong: #ffd166;
+  --danger: #ff6b8a;
   color-scheme: dark;
 }
 
@@ -279,6 +280,244 @@ h1 {
   color: var(--muted);
   max-width: 60ch;
   margin: 1rem 0 0;
+}
+
+/* What share goes in tax? */
+.tax {
+  margin: 3rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.tax h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+}
+
+.tax-intro {
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 0 0 1.5rem;
+}
+
+.tax-intro strong {
+  color: var(--text);
+}
+
+.tax-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.tax-inputs label {
+  display: block;
+}
+
+.tax-inputs label span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.tax-compare {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.tax-col {
+  flex: 1 1 240px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.tax-col-bill {
+  border-color: var(--danger);
+}
+
+.tax-col-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tax-big {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0.4rem 0 0;
+  line-height: 1;
+  color: var(--accent-strong);
+}
+
+.tax-col-bill .tax-big {
+  color: var(--danger);
+}
+
+.tax-sub {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.tax-wealth {
+  margin: 0.8rem 0 0;
+  font-size: 0.95rem;
+}
+
+.tax-vs {
+  align-self: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.tax-breakdown {
+  margin-bottom: 2rem;
+}
+
+.tax-breakdown h3 {
+  font-size: 1rem;
+  margin: 0 0 0.6rem;
+}
+
+.tax-breakdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 420px;
+}
+
+.tax-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+.tax-row-amt {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.tax-row-pct {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  min-width: 3.5ch;
+  text-align: right;
+}
+
+.tax-row-total {
+  border-bottom: 0;
+  font-weight: 700;
+  border-top: 2px solid var(--border);
+  margin-top: 0.25rem;
+}
+
+.tax-row-total .tax-row-pct {
+  color: var(--accent-strong);
+}
+
+.taxchart {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  margin: 0.5rem 0 1rem;
+}
+
+.tc-grid {
+  stroke: var(--border);
+  opacity: 0.5;
+}
+
+.tc-tick,
+.tc-axis {
+  fill: var(--muted);
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.tc-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.tc-dot {
+  fill: var(--accent);
+}
+
+.tc-guide {
+  stroke: var(--accent-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.7;
+}
+
+.tc-user {
+  fill: var(--accent-strong);
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+
+.tc-user-label {
+  fill: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.tc-bill {
+  fill: var(--danger);
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+
+.tc-bill-label {
+  fill: var(--danger);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.tax-callout {
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  border-left: 3px solid var(--danger);
+  padding: 0.9rem 1.1rem;
+  border-radius: 0 10px 10px 0;
+  max-width: 62ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.tax-assumptions {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.tax-assumptions summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.tax-assumptions ul {
+  margin: 0.5rem 0;
+  padding-left: 1.1rem;
+}
+
+.tax-scope {
+  font-size: 0.82rem;
+  font-style: italic;
 }
 
 .sources h2 {

@@ -121,6 +121,31 @@ SOURCES = {
         "url": "https://osr.statisticsauthority.gov.uk/news/"
                "osr-suspend-accreditation-of-wealth-and-assets-survey/",
     },
+    # --- used by build_tax.py (kept here so sources.json carries every id) ---
+    "ons_etb": {
+        "title": "Effects of taxes and benefits on UK household income: "
+                 "financial year ending 2024 (Table 8)",
+        "publisher": "Office for National Statistics",
+        "published": "2025-09-25",
+        "licence": "Open Government Licence v3.0",
+        "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/"
+               "personalandhouseholdfinances/incomeandwealth/bulletins/"
+               "theeffectsoftaxesandbenefitsonhouseholdincome/2024",
+    },
+    "advani_2023": {
+        "title": "How much tax do the rich really pay? Evidence from the UK",
+        "authors": "Advani, Hughson & Summers",
+        "publisher": "Oxford Review of Economic Policy / LSE III / CAGE",
+        "published": "2023",
+        "licence": "Cite with attribution.",
+        "url": "https://academic.oup.com/oxrep/article/39/3/406/7245704",
+    },
+    "hmrc_income_tax_2025_26": {
+        "title": "Income Tax rates and Personal Allowances (2025/26)",
+        "publisher": "GOV.UK / HMRC",
+        "licence": "Open Government Licence v3.0",
+        "url": "https://www.gov.uk/income-tax-rates",
+    },
 }
 
 

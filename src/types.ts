@@ -38,6 +38,48 @@ export interface Source {
 
 export type Sources = Record<string, Source>;
 
+export interface TaxData {
+  meta: { generated: string; period: string; measuredSourceId: string; note: string };
+  quintiles: {
+    sourceId: string;
+    label: string[];
+    boundaryEquivalisedGbp: number[];
+    representativeIncomeGbp: number[];
+    allTaxesPctGross: number[];
+    incomeTaxPctGross: number[];
+    niPctGross: number[];
+    councilPctGross: number[];
+    indirectPctGross: number[];
+  };
+  incomeTax2025_26: {
+    sourceId: string;
+    personalAllowance: number;
+    paTaperStart: number;
+    paTaperEnd: number;
+    bands: { threshold: number; rate: number }[];
+    ni: {
+      primaryThreshold: number;
+      upperEarningsLimit: number;
+      mainRate: number;
+      upperRate: number;
+    };
+  };
+  topTailAdvani: {
+    sourceId: string;
+    note: string;
+    points: number[][];
+    quarterOf3mPlusPaidAtMostPct: number;
+  };
+  billionaire: {
+    sourceId: string;
+    wealthGbp: number;
+    economicReturnPct: number;
+    realisedTaxableYieldPct: number;
+    effectiveRateOnRealisedPct: number;
+    note: string;
+  };
+}
+
 export interface Distribution {
   meta: {
     generated: string;

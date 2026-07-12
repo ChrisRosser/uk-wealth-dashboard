@@ -2,13 +2,18 @@ import { useMemo, useState } from "react";
 import { headlines, sources, resolveValue } from "./data";
 import type { Basis } from "./types";
 import WhereDoYouSit from "./components/WhereDoYouSit";
+import TaxBurden from "./components/TaxBurden";
 
 export default function App() {
   const [basis, setBasis] = useState<Basis>("survey");
 
-  // Which sources are actually referenced by the currently shown figures.
+  // Which sources are referenced by the shown figures + the tax panel.
   const usedSourceIds = useMemo(() => {
-    const ids = new Set<string>();
+    const ids = new Set<string>([
+      "ons_etb",
+      "advani_2023",
+      "hmrc_income_tax_2025_26",
+    ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);
       if (r?.sourceId) ids.add(r.sourceId);
@@ -68,6 +73,8 @@ export default function App() {
       </main>
 
       <WhereDoYouSit />
+
+      <TaxBurden />
 
       <section className="sources">
         <h2>Sources</h2>

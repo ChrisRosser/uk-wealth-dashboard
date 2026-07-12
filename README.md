@@ -64,7 +64,11 @@ Open Government Licence v3.0 with attribution.
 - **M2 ✅** Static PWA shell rendering the data
 - **M1 ✅** Real pipeline: parses ONS WAS decile tables (Lorenz + Gini +
   composition), fits a Pareto tail for the top 0.1%, emits validated JSON
-- **M3** Lorenz curve, Pen's Parade, "where do you sit?", composition, regional
+- **M3** ✅ (partial) Interactive Lorenz curve + "where do you sit?"; **"What
+  share goes in tax?"** — effective tax burden (income tax + NI computed from
+  2025/26 bands, VAT/council imputed from ONS ETB) as a share of income *and*
+  wealth, vs a £1bn benchmark, grounded in ONS + Advani/Summers. Still to do:
+  Pen's Parade, composition bars, regional
 - **M4** PWA polish (offline, installable, Lighthouse)
 - **M5** Accessibility, dark/light, social cards, launch
 

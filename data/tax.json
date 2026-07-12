@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "generated": "2026-07-12",
+    "pipelineVersion": "1.0.0",
+    "measuredSourceId": "ons_etb",
+    "period": "FYE 2024 (2023/24)",
+    "geography": "UK",
+    "note": "Quintile rates are MEASURED (ONS ETB Table 8, % of gross income). Income-tax bands, the top-tail curve and the billionaire benchmark are curated — see sourceId on each."
+  },
+  "quintiles": {
+    "sourceId": "ons_etb",
+    "label": [
+      "Bottom",
+      "2nd",
+      "3rd",
+      "4th",
+      "Top"
+    ],
+    "boundaryEquivalisedGbp": [
+      22366,
+      31869,
+      42040,
+      56456
+    ],
+    "representativeIncomeGbp": [
+      12300,
+      27100,
+      37000,
+      49200,
+      96000
+    ],
+    "allTaxesPctGross": [
+      36.7,
+      30.7,
+      30.2,
+      31.7,
+      36.2
+    ],
+    "incomeTaxPctGross": [
+      7.1,
+      7.8,
+      10.2,
+      13.0,
+      22.3
+    ],
+    "niPctGross": [
+      2.8,
+      3.9,
+      4.9,
+      5.7,
+      4.7
+    ],
+    "councilPctGross": [
+      5.7,
+      3.8,
+      3.0,
+      2.4,
+      1.5
+    ],
+    "indirectPctGross": [
+      21.0,
+      15.1,
+      11.9,
+      10.4,
+      7.5
+    ]
+  },
+  "incomeTax2025_26": {
+    "sourceId": "hmrc_income_tax_2025_26",
+    "personalAllowance": 12570,
+    "paTaperStart": 100000,
+    "paTaperEnd": 125140,
+    "bands": [
+      {
+        "threshold": 12570,
+        "rate": 0.2
+      },
+      {
+        "threshold": 50270,
+        "rate": 0.4
+      },
+      {
+        "threshold": 125140,
+        "rate": 0.45
+      }
+    ],
+    "ni": {
+      "primaryThreshold": 12570,
+      "upperEarningsLimit": 50270,
+      "mainRate": 0.08,
+      "upperRate": 0.02
+    }
+  },
+  "topTailAdvani": {
+    "sourceId": "advani_2023",
+    "note": "Effective average tax rate on remuneration (income + realised capital gains). Peaks ~38% at £500k then falls below 30% above £3m; a quarter of those with £3m+ paid 12% or less.",
+    "points": [
+      [
+        100000,
+        35
+      ],
+      [
+        250000,
+        37
+      ],
+      [
+        500000,
+        38
+      ],
+      [
+        1000000,
+        35
+      ],
+      [
+        3000000,
+        30
+      ],
+      [
+        5000000,
+        27
+      ],
+      [
+        10000000,
+        21
+      ]
+    ],
+    "quarterOf3mPlusPaidAtMostPct": 12
+  },
+  "billionaire": {
+    "sourceId": "advani_2023",
+    "wealthGbp": 1000000000,
+    "economicReturnPct": 6,
+    "realisedTaxableYieldPct": 2,
+    "effectiveRateOnRealisedPct": 30,
+    "note": "Illustrative. £1bn earning ~6%/yr (~£60m) but only ~2% of wealth (~£20m) realised as taxable income, taxed at ~30% (Advani). Adjust the assumptions to test the result."
+  }
+}
