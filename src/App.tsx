@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { headlines, sources, resolveValue } from "./data";
 import type { Basis } from "./types";
+import WhereDoYouSit from "./components/WhereDoYouSit";
 
 export default function App() {
   const [basis, setBasis] = useState<Basis>("survey");
@@ -65,6 +66,8 @@ export default function App() {
           );
         })}
       </main>
+
+      <WhereDoYouSit />
 
       <section className="sources">
         <h2>Sources</h2>

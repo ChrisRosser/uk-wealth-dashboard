@@ -37,3 +37,26 @@ export interface Source {
 }
 
 export type Sources = Record<string, Source>;
+
+export interface Distribution {
+  meta: {
+    generated: string;
+    period: string;
+    sourceId: string;
+    geography: Geography;
+    unit: Unit;
+    totalWealthGbp: number;
+  };
+  thresholds: { p10: number; p50: number; p90: number; p99: number; p999: number };
+  composition: { property: number; pension: number; financial: number; physical: number };
+  decilesAggregateGbpMillion: number[];
+  /** [cumulative population share, cumulative wealth share] pairs, 0..1 */
+  lorenz: [number, number][];
+  paretoTail: {
+    alpha: number;
+    fitFrom: string;
+    impliedTop01ShareSurvey: number;
+    impliedTop01ThresholdGbp: number;
+    method: string;
+  };
+}

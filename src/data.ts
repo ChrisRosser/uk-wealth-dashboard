@@ -1,9 +1,11 @@
 import headlinesJson from "../data/headlines.json";
 import sourcesJson from "../data/sources.json";
-import type { Headlines, Sources } from "./types";
+import distributionJson from "../data/distribution.json";
+import type { Distribution, Headlines, Sources } from "./types";
 
 export const headlines = headlinesJson as Headlines;
 export const sources = sourcesJson as Sources;
+export const distribution = distributionJson as Distribution;
 
 /** Resolve a figure's display value for the chosen basis, falling back sensibly. */
 export function resolveValue(

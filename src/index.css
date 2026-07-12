@@ -133,6 +133,154 @@ h1 {
   padding: 0.1rem 0.4rem;
 }
 
+/* Where do you sit? + Lorenz */
+.wdys {
+  margin: 3rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.wdys h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+}
+
+.wdys-intro {
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 0 1.25rem;
+}
+
+.wdys-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.5rem 0.9rem;
+  max-width: 320px;
+}
+
+.wdys-prefix {
+  color: var(--muted);
+  font-size: 1.4rem;
+}
+
+.wdys-input input {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.6rem;
+  font-weight: 700;
+  width: 100%;
+  outline: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.wdys-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.9rem 0 1.5rem;
+}
+
+.wdys-presets button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.wdys-presets button:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.wdys-result {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 60ch;
+  margin: 0 0 1.5rem;
+}
+
+.wdys-result strong {
+  color: var(--accent-strong);
+}
+
+.lorenz {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+}
+
+.lorenz-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+.lorenz-tick,
+.lorenz-axis {
+  fill: var(--muted);
+  font-size: 12px;
+  font-family: inherit;
+}
+
+.lorenz-axis {
+  font-size: 12.5px;
+}
+
+.lorenz-diagonal {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.lorenz-area {
+  fill: var(--accent);
+  opacity: 0.14;
+}
+
+.lorenz-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.lorenz-guide {
+  stroke: var(--accent-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.8;
+}
+
+.lorenz-marker {
+  fill: var(--accent-strong);
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+
+.lorenz-marker-label {
+  fill: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.wdys-foot {
+  font-size: 0.82rem;
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 1rem 0 0;
+}
+
 .sources h2 {
   font-size: 1.1rem;
 }
