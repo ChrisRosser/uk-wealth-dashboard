@@ -66,8 +66,8 @@ export default function TaxBurden() {
           <div className="tax-return">
             <input
               type="range"
-              min={4}
-              max={50}
+              min={8}
+              max={15}
               step={1}
               value={returnPct}
               onChange={(e) => setReturnPct(Number(e.target.value))}
