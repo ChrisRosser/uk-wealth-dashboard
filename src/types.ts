@@ -73,6 +73,7 @@ export interface TaxData {
   billionaire: {
     sourceId: string;
     wealthGbp: number;
+    homeEquityGbp: number;
     economicReturnPct: number;
     realisedTaxableYieldPct: number;
     realisedGainsSharePct: number;

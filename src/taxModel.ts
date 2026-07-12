@@ -162,8 +162,10 @@ export function billionaire(
 ): BillionaireResult {
   const b = t.billionaire;
   const wealth = b.wealthGbp;
-  const economicIncome = wealth * (economicReturnPct / 100);
-  const realisedTaxable = wealth * (b.realisedTaxableYieldPct / 100);
+  // Only invested wealth (total minus the home) generates income.
+  const invested = wealth - b.homeEquityGbp;
+  const economicIncome = invested * (economicReturnPct / 100);
+  const realisedTaxable = invested * (b.realisedTaxableYieldPct / 100);
 
   const gains = realisedTaxable * (b.realisedGainsSharePct / 100);
   const dividends = realisedTaxable - gains;

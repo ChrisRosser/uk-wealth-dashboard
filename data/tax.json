@@ -129,6 +129,7 @@
   "billionaire": {
     "sourceId": "advani_2023",
     "wealthGbp": 1000000000,
+    "homeEquityGbp": 30000000,
     "economicReturnPct": 8,
     "realisedTaxableYieldPct": 2,
     "realisedGainsSharePct": 60,

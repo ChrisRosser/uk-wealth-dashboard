@@ -173,8 +173,9 @@ def build() -> None:
         "billionaire": {
             "sourceId": "advani_2023",
             "wealthGbp": 1_000_000_000,
-            "economicReturnPct": 8,           # total annual return incl. unrealised
-            "realisedTaxableYieldPct": 2,     # realised, taxable income as % wealth
+            "homeEquityGbp": 30_000_000,      # a mansion; generates no income
+            "economicReturnPct": 8,           # annual return on invested wealth
+            "realisedTaxableYieldPct": 2,     # realised, taxable income as % invested
             "realisedGainsSharePct": 60,      # of realised income; the rest dividends
             "cgtRatePct": 24,                 # 2025/26 higher-rate CGT (GOV.UK)
             "dividendRatePct": 39.35,         # 2025/26 additional-rate dividend

@@ -32,17 +32,14 @@ function useNumber(initial: number) {
 
 export default function TaxBurden() {
   const income = useNumber(35_000);
-  const pension = useNumber(100_000);
   const investments = useNumber(20_000);
-  const house = useNumber(290_000);
-  const mortgage = useNumber(116_000);
+  const homeEquity = useNumber(175_000);
   const [returnPct, setReturnPct] = useState(t.billionaire.economicReturnPct);
   const b = t.billionaire;
   const cfg = t.incomeTax2025_26;
 
   const investedWealth = investments.value ?? 0;
-  const netWealth =
-    (pension.value ?? 0) + investedWealth + (house.value ?? 0) - (mortgage.value ?? 0);
+  const netWealth = investedWealth + (homeEquity.value ?? 0);
 
   const you = useMemo(
     () =>
@@ -93,10 +90,8 @@ export default function TaxBurden() {
         <div className="tax-side">
           <p className="tax-side-head">You</p>
           <MoneyField label="Annual income" field={income} />
-          <MoneyField label="Pension pot" field={pension} />
           <MoneyField label="Investments (ISAs, shares)" field={investments} />
-          <MoneyField label="House value" field={house} />
-          <MoneyField label="Mortgage owed" field={mortgage} />
+          <MoneyField label="Home equity (house − mortgage)" field={homeEquity} />
           <p className="tax-net">
             Net wealth <strong>{gbp(netWealth)}</strong>
             <span> · {gbp(investedWealth)} taxable (investments only)</span>
@@ -105,34 +100,23 @@ export default function TaxBurden() {
 
         <div className="tax-side tax-side-bill">
           <p className="tax-side-head">The poorest billionaire</p>
-          <div className="tax-fixed">
-            <span className="tax-fixed-label">
-              Income <em>{returnPct}% / yr</em>
-            </span>
-            <div className="wdys-input wdys-input-locked">
-              <span className="wdys-prefix">£</span>
-              <span className="tax-fixed-val">{gbp(bill.economicIncome).slice(1)}</span>
-            </div>
-            <div className="tax-return">
-              <input
-                type="range"
-                min={8}
-                max={15}
-                step={1}
-                value={returnPct}
-                onChange={(e) => setReturnPct(Number(e.target.value))}
-                aria-label="Assumed annual return on the billionaire's wealth"
-              />
-            </div>
-          </div>
-          <div className="tax-fixed">
-            <span className="tax-fixed-label">
-              Wealth <em>fixed</em>
-            </span>
-            <div className="wdys-input wdys-input-locked">
-              <span className="wdys-prefix">£</span>
-              <span className="tax-fixed-val">{gbp(b.wealthGbp).slice(1)}</span>
-            </div>
+          <FixedField label="Annual income" value="0" />
+          <FixedField label="Investments" value={gbp(b.wealthGbp - b.homeEquityGbp).slice(1)} />
+          <FixedField label="Home equity" value={gbp(b.homeEquityGbp).slice(1)} />
+          <p className="tax-net">
+            Net wealth <strong>{gbp(b.wealthGbp)}</strong>
+            <span> · investments earn {gbp(bill.economicIncome)}/yr at {returnPct}%</span>
+          </p>
+          <div className="tax-return">
+            <input
+              type="range"
+              min={8}
+              max={15}
+              step={1}
+              value={returnPct}
+              onChange={(e) => setReturnPct(Number(e.target.value))}
+              aria-label="Assumed annual return on the billionaire's wealth"
+            />
           </div>
         </div>
       </div>
@@ -225,9 +209,9 @@ export default function TaxBurden() {
         <summary>Assumptions for the billionaire benchmark</summary>
         <p>{b.note}</p>
         <ul>
-          <li>Wealth: {gbp(b.wealthGbp)}</li>
-          <li>Total annual return incl. unrealised: {b.economicReturnPct}% = {gbp(bill.economicIncome)}</li>
-          <li>Realised, taxable income: {b.realisedTaxableYieldPct}% of wealth = {gbp(bill.realisedTaxable)}</li>
+          <li>Wealth {gbp(b.wealthGbp)} — {gbp(b.wealthGbp - b.homeEquityGbp)} investments + a {gbp(b.homeEquityGbp)} home</li>
+          <li>Return on investments incl. unrealised: {b.economicReturnPct}% = {gbp(bill.economicIncome)}</li>
+          <li>Realised, taxable income: {b.realisedTaxableYieldPct}% of investments = {gbp(bill.realisedTaxable)}</li>
           <li>
             Split {b.realisedGainsSharePct}% capital gains @ {b.cgtRatePct}%,{" "}
             {100 - b.realisedGainsSharePct}% dividends @ {b.dividendRatePct}%
@@ -274,6 +258,18 @@ function MoneyField({
         />
       </div>
     </label>
+  );
+}
+
+function FixedField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="tax-fixed">
+      <span className="tax-fixed-label">{label}</span>
+      <div className="wdys-input wdys-input-locked">
+        <span className="wdys-prefix">£</span>
+        <span className="tax-fixed-val">{value}</span>
+      </div>
+    </div>
   );
 }
 
