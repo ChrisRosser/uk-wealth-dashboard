@@ -216,6 +216,8 @@ def build() -> None:
             "vatRatePct": 20,
             "stampDutyGbp": 10_400_000_000,       # residential SDLT, England 2024-25
             "stampDutySourceId": "hmrc_stamp",
+            "councilTaxGbp": 41_000_000_000,      # council tax collected, England 2024-25
+            "councilTaxSourceId": "council_tax",
             "nurseCostGbp": 45_000,               # salary + pension + employer NI ≈
             "doctorCostGbp": 100_000,
             "teacherCostGbp": 47_000,

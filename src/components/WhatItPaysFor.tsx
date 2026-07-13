@@ -20,7 +20,7 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const incomeCutP = Math.round(extra / p.taxCutPerPennyGbp);
   const corpCutP = Math.round(extra / p.corpTaxPerPointGbp);
   const vatCutP = Math.round(extra / p.vatPerPointGbp);
-  const stampMultiple = extra / p.stampDutyGbp;
+  const councilCutPct = Math.round((extra / p.councilTaxGbp) * 100);
 
   // Spending
   const nhsMultiple = 1 + extra / (p.nhsNurses * p.nurseCostGbp + p.nhsDoctors * p.doctorCostGbp);
@@ -59,9 +59,11 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           </p>
         </div>
         <div className="payfor-card payfor-card-lead">
-          <p className="payfor-value">{stampMultiple.toFixed(1)}×</p>
-          <p className="payfor-label">abolish stamp duty</p>
-          <p className="payfor-note">over the ~£{Math.round(p.stampDutyGbp / 1e9)}bn it raises</p>
+          <p className="payfor-value">−{councilCutPct}%</p>
+          <p className="payfor-label">off everyone&apos;s council tax</p>
+          <p className="payfor-note">
+            a cut in the ~£{Math.round(p.councilTaxGbp / 1e9)}bn bill households pay
+          </p>
         </div>
       </div>
 
@@ -89,7 +91,7 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
         </div>
         <div className="payfor-card">
           <p className="payfor-value">{roundish(homes)}</p>
-          <p className="payfor-label">new social homes a year</p>
+          <p className="payfor-label">new council houses a year</p>
           <p className="payfor-note">at the ~£{Math.round(p.homeGrantGbp / 1000)}k grant each (NHF)</p>
         </div>
       </div>
@@ -106,14 +108,14 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           <li>
             Tax cuts (HMRC ready reckoner): {gbp(p.taxCutPerPennyGbp)} per 1p on income
             tax, {gbp(p.vatPerPointGbp)} per VAT point, {gbp(p.corpTaxPerPointGbp)} per
-            corporation-tax point; stamp duty raises ~{gbp(p.stampDutyGbp)}
+            corporation-tax point; council tax raises ~{gbp(p.councilTaxGbp)} (England)
           </li>
           <li>
             NHS: {commas(p.nhsDoctors)} doctors + {commas(p.nhsNurses)} nurses, at
             ~{gbp(p.doctorCostGbp)} / {gbp(p.nurseCostGbp)} each; police {commas(p.policeOfficers)}{" "}
             at ~{gbp(p.policeCostGbp)}; teachers {commas(p.teacherCount)} at ~{gbp(p.teacherCostGbp)}
           </li>
-          <li>Social homes at ~{gbp(p.homeGrantGbp)} government grant each (NHF)</li>
+          <li>Council houses at ~{gbp(p.homeGrantGbp)} government grant each (NHF)</li>
         </ul>
       </details>
     </section>

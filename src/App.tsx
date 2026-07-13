@@ -27,7 +27,7 @@ export default function App() {
       "oxfam_takers",
       "obr_receipts",
       "hmrc_reckoner",
-      "hmrc_stamp",
+      "council_tax",
       "gov_pay",
       "nhs_workforce",
       "school_workforce",

@@ -102,6 +102,8 @@ export interface TaxData {
     vatRatePct: number;
     stampDutyGbp: number;
     stampDutySourceId: string;
+    councilTaxGbp: number;
+    councilTaxSourceId: string;
     nurseCostGbp: number;
     doctorCostGbp: number;
     teacherCostGbp: number;

@@ -192,6 +192,17 @@ SOURCES = {
         "licence": "Open Government Licence v3.0",
         "url": "https://www.gov.uk/government/statistics/uk-stamp-tax-statistics",
     },
+    "council_tax": {
+        "title": "Collection rates for Council Tax — ≈ £41bn collected "
+                 "(England, 2024-25)",
+        "publisher": "GOV.UK / MHCLG",
+        "published": "2025",
+        "licence": "Open Government Licence v3.0",
+        "url": "https://www.gov.uk/government/statistics/"
+               "collection-rates-for-council-tax-and-non-domestic-rates-in-"
+               "england-2024-to-2025/collection-rates-for-council-tax-and-"
+               "non-domestic-rates-in-england-2024-to-2025",
+    },
     "commons_defence": {
         "title": "UK defence spending: £60.2bn in 2024-25",
         "publisher": "House of Commons Library",

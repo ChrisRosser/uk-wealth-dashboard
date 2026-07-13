@@ -158,6 +158,8 @@
     "vatRatePct": 20,
     "stampDutyGbp": 10400000000,
     "stampDutySourceId": "hmrc_stamp",
+    "councilTaxGbp": 41000000000,
+    "councilTaxSourceId": "council_tax",
     "nurseCostGbp": 45000,
     "doctorCostGbp": 100000,
     "teacherCostGbp": 47000,
