@@ -107,6 +107,15 @@ export interface TaxData {
     teacherSourceId: string;
     freeUniversityGbp: number;
     freeUniversitySourceId: string;
+    policeOfficers: number;
+    policeCostGbp: number;
+    policeSourceId: string;
+    socialCareGbp: number;
+    socialCareSourceId: string;
+    homeGrantGbp: number;
+    homeSourceId: string;
+    freeChildcareGbp: number;
+    childcareSourceId: string;
     defenceBudgetGbp: number;
     defenceSourceId: string;
     note: string;

@@ -32,6 +32,10 @@ export default function App() {
       "nhs_workforce",
       "school_workforce",
       "ifs_tuition",
+      "police_workforce",
+      "health_foundation",
+      "nhf_homes",
+      "commons_childcare",
     ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);

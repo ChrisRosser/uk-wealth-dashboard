@@ -224,6 +224,39 @@ SOURCES = {
                "labours-higher-education-proposals-will-cost-ps8bn-year-"
                "although-increase-deficit-more",
     },
+    "police_workforce": {
+        "title": "Police workforce, England and Wales — 148,886 officers "
+                 "(30 September 2024)",
+        "publisher": "GOV.UK / Home Office",
+        "published": "2024",
+        "licence": "Open Government Licence v3.0",
+        "url": "https://www.gov.uk/government/statistics/"
+               "police-workforce-england-and-wales-30-september-2024/"
+               "police-workforce-england-and-wales-30-september-2024",
+    },
+    "health_foundation": {
+        "title": "Free personal care in England would cost ≈ £7-14bn a year",
+        "publisher": "The Health Foundation",
+        "licence": "Cite with attribution.",
+        "url": "https://health.org.uk/news-and-comment/blogs/"
+               "the-real-cost-of-a-fair-adult-social-care-system",
+    },
+    "nhf_homes": {
+        "title": "Capital grant to meet social housing need — ≈ £130-140k per "
+                 "home (CEBR / NHF)",
+        "publisher": "National Housing Federation",
+        "licence": "Cite with attribution.",
+        "url": "https://www.housing.org.uk/resources/"
+               "capital-grant-required-to-meet-social-housing-need-in-"
+               "england-2021-2031/",
+    },
+    "commons_childcare": {
+        "title": "Early years funding in England — free childcare offer ≈ £8bn "
+                 "a year",
+        "publisher": "House of Commons Library",
+        "licence": "Open Parliament Licence.",
+        "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-8052/",
+    },
 }
 
 

@@ -221,6 +221,15 @@ def build() -> None:
             "teacherSourceId": "school_workforce",
             "freeUniversityGbp": 10_000_000_000,  # abolish tuition fees, IFS ~£8-11bn
             "freeUniversitySourceId": "ifs_tuition",
+            "policeOfficers": 148_886,            # England & Wales, Sept 2024
+            "policeCostGbp": 70_000,              # all-in cost of an extra officer ≈
+            "policeSourceId": "police_workforce",
+            "socialCareGbp": 9_000_000_000,       # free personal care, Health Foundation
+            "socialCareSourceId": "health_foundation",
+            "homeGrantGbp": 140_000,              # gov grant per social home (NHF/CEBR)
+            "homeSourceId": "nhf_homes",
+            "freeChildcareGbp": 8_000_000_000,    # free-hours childcare offer (Commons)
+            "childcareSourceId": "commons_childcare",
             "defenceBudgetGbp": 60_200_000_000,   # 2024-25, Commons Library
             "defenceSourceId": "commons_defence",
             "note": "Illustrative equivalents for the extra revenue. Staff "

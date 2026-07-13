@@ -4,6 +4,7 @@ import { gbp } from "../lib";
 import { billionaire } from "../taxModel";
 
 const commas = (n: number) => n.toLocaleString("en-GB");
+const roundish = (n: number) => (Math.round(n / 10_000) * 10_000).toLocaleString("en-GB");
 
 export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const p = t.payFor;
@@ -19,7 +20,11 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const nhsCost = p.nhsNurses * p.nurseCostGbp + p.nhsDoctors * p.doctorCostGbp;
   const nhsMultiple = 1 + extra / nhsCost;
   const teacherMultiple = 1 + extra / (p.teacherCount * p.teacherCostGbp);
+  const policeMultiple = 1 + extra / (p.policeOfficers * p.policeCostGbp);
   const uniMultiple = extra / p.freeUniversityGbp;
+  const childcareMultiple = extra / p.freeChildcareGbp;
+  const socialCareMultiple = extra / p.socialCareGbp;
+  const homes = extra / p.homeGrantGbp;
   const defencePct = Math.round((extra / p.defenceBudgetGbp) * 100);
 
   return (
@@ -46,6 +51,13 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           </p>
         </div>
         <div className="payfor-card">
+          <p className="payfor-value">{policeMultiple.toFixed(1)}×</p>
+          <p className="payfor-label">the police officers on the streets</p>
+          <p className="payfor-note">
+            {commas(p.policeOfficers)} serve in England &amp; Wales today
+          </p>
+        </div>
+        <div className="payfor-card">
           <p className="payfor-value">{teacherMultiple.toFixed(1)}×</p>
           <p className="payfor-label">the teachers in our schools</p>
           <p className="payfor-note">
@@ -58,6 +70,28 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           <p className="payfor-note">
             over the ~£{Math.round(p.freeUniversityGbp / 1e9)}bn cost of scrapping
             fees (IFS)
+          </p>
+        </div>
+        <div className="payfor-card">
+          <p className="payfor-value">{childcareMultiple.toFixed(1)}×</p>
+          <p className="payfor-label">free childcare</p>
+          <p className="payfor-note">
+            over the ~£{Math.round(p.freeChildcareGbp / 1e9)}bn free-hours offer
+          </p>
+        </div>
+        <div className="payfor-card">
+          <p className="payfor-value">{socialCareMultiple.toFixed(1)}×</p>
+          <p className="payfor-label">free social care</p>
+          <p className="payfor-note">
+            over the ~£{Math.round(p.socialCareGbp / 1e9)}bn cost of free personal
+            care (Health Foundation)
+          </p>
+        </div>
+        <div className="payfor-card">
+          <p className="payfor-value">{roundish(homes)}</p>
+          <p className="payfor-label">new social homes a year</p>
+          <p className="payfor-note">
+            at the ~£{Math.round(p.homeGrantGbp / 1000)}k grant each (NHF)
           </p>
         </div>
         <div className="payfor-card">
@@ -84,7 +118,9 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
             ~{gbp(p.doctorCostGbp)} / {gbp(p.nurseCostGbp)} full cost each
           </li>
           <li>Schools: {commas(p.teacherCount)} teachers at ~{gbp(p.teacherCostGbp)} each</li>
-          <li>Free university: ~{gbp(p.freeUniversityGbp)}/yr to abolish tuition fees (IFS)</li>
+          <li>Police: {commas(p.policeOfficers)} officers at ~{gbp(p.policeCostGbp)} full cost each</li>
+          <li>Free university {gbp(p.freeUniversityGbp)} (IFS) · free childcare {gbp(p.freeChildcareGbp)} (Commons) · free social care {gbp(p.socialCareGbp)} (Health Foundation)</li>
+          <li>Social homes at ~{gbp(p.homeGrantGbp)} government grant each (NHF)</li>
           <li>Defence: {gbp(p.defenceBudgetGbp)} budget (2024–25)</li>
         </ul>
       </details>
