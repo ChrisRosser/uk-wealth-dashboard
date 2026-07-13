@@ -170,8 +170,6 @@
     "socialCareSourceId": "health_foundation",
     "homeGrantGbp": 140000,
     "homeSourceId": "nhf_homes",
-    "freeChildcareGbp": 8000000000,
-    "childcareSourceId": "commons_childcare",
     "defenceBudgetGbp": 60200000000,
     "defenceSourceId": "commons_defence",
     "note": "Illustrative equivalents for the extra revenue. Staff figures are approximate full employment cost (salary + pension + employer NI); each option is the whole sum spent one way, not all at once."

@@ -114,8 +114,6 @@ export interface TaxData {
     socialCareSourceId: string;
     homeGrantGbp: number;
     homeSourceId: string;
-    freeChildcareGbp: number;
-    childcareSourceId: string;
     defenceBudgetGbp: number;
     defenceSourceId: string;
     note: string;

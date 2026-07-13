@@ -35,7 +35,6 @@ export default function App() {
       "police_workforce",
       "health_foundation",
       "nhf_homes",
-      "commons_childcare",
     ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);

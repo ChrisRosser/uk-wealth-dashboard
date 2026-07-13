@@ -250,13 +250,6 @@ SOURCES = {
                "capital-grant-required-to-meet-social-housing-need-in-"
                "england-2021-2031/",
     },
-    "commons_childcare": {
-        "title": "Early years funding in England — free childcare offer ≈ £8bn "
-                 "a year",
-        "publisher": "House of Commons Library",
-        "licence": "Open Parliament Licence.",
-        "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-8052/",
-    },
 }
 
 

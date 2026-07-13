@@ -22,7 +22,6 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const teacherMultiple = 1 + extra / (p.teacherCount * p.teacherCostGbp);
   const policeMultiple = 1 + extra / (p.policeOfficers * p.policeCostGbp);
   const uniMultiple = extra / p.freeUniversityGbp;
-  const childcareMultiple = extra / p.freeChildcareGbp;
   const socialCareMultiple = extra / p.socialCareGbp;
   const homes = extra / p.homeGrantGbp;
   const defencePct = Math.round((extra / p.defenceBudgetGbp) * 100);
@@ -73,13 +72,6 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           </p>
         </div>
         <div className="payfor-card">
-          <p className="payfor-value">{childcareMultiple.toFixed(1)}×</p>
-          <p className="payfor-label">free childcare</p>
-          <p className="payfor-note">
-            over the ~£{Math.round(p.freeChildcareGbp / 1e9)}bn free-hours offer
-          </p>
-        </div>
-        <div className="payfor-card">
           <p className="payfor-value">{socialCareMultiple.toFixed(1)}×</p>
           <p className="payfor-label">free social care</p>
           <p className="payfor-note">
@@ -119,7 +111,7 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           </li>
           <li>Schools: {commas(p.teacherCount)} teachers at ~{gbp(p.teacherCostGbp)} each</li>
           <li>Police: {commas(p.policeOfficers)} officers at ~{gbp(p.policeCostGbp)} full cost each</li>
-          <li>Free university {gbp(p.freeUniversityGbp)} (IFS) · free childcare {gbp(p.freeChildcareGbp)} (Commons) · free social care {gbp(p.socialCareGbp)} (Health Foundation)</li>
+          <li>Free university {gbp(p.freeUniversityGbp)} (IFS) · free social care {gbp(p.socialCareGbp)} (Health Foundation)</li>
           <li>Social homes at ~{gbp(p.homeGrantGbp)} government grant each (NHF)</li>
           <li>Defence: {gbp(p.defenceBudgetGbp)} budget (2024–25)</li>
         </ul>
