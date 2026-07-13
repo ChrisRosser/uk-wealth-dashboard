@@ -11,6 +11,8 @@ import {
 } from "../taxModel";
 import type { NumberField } from "../useNumber";
 import TaxRateChart from "./TaxRateChart";
+import TaxTake from "./TaxTake";
+import WhatItPaysFor from "./WhatItPaysFor";
 
 interface BillRow {
   label: string;
@@ -151,6 +153,13 @@ export default function TaxBurden({
             </p>
           </div>
         </div>
+      )}
+
+      {you && (
+        <>
+          <TaxTake incomeRate={you.pctOfIncome} wealthRate={you.pctOfWealth} />
+          <WhatItPaysFor incomeRate={you.pctOfIncome} />
+        </>
       )}
 
       {you && income.value != null && (

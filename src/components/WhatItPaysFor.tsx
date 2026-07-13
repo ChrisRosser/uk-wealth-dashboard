@@ -5,16 +5,15 @@ import { billionaire } from "../taxModel";
 
 const commas = (n: number) => n.toLocaleString("en-GB");
 
-export default function WhatItPaysFor() {
+export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const p = t.payFor;
   const bill = useMemo(() => billionaire(t), []);
 
-  // Extra revenue: the top 0.1% paying the median household's effective income
-  // rate on the income their wealth earns (~£22bn).
+  // Extra revenue: the top 0.1% paying YOUR effective income rate on the income
+  // their wealth earns.
   const top01Wealth = t.taxTake.totalHouseholdWealthGbp * t.taxTake.top01WealthShare;
   const econIncome = top01Wealth * (t.billionaire.economicReturnPct / 100);
-  const medianRate = t.quintiles.allTaxesPctGross[2] / 100;
-  const extra = econIncome * (medianRate - bill.pctOfEconomicIncome);
+  const extra = Math.max(0, econIncome * (incomeRate - bill.pctOfEconomicIncome));
 
   const taxCutPence = Math.round(extra / p.taxCutPerPennyGbp);
   const nhsCost = p.nhsNurses * p.nurseCostGbp + p.nhsDoctors * p.doctorCostGbp;
@@ -42,14 +41,14 @@ export default function WhatItPaysFor() {
           <p className="payfor-value">{nhsMultiple.toFixed(1)}×</p>
           <p className="payfor-label">the doctors &amp; nurses in the NHS</p>
           <p className="payfor-note">
-            half as many again as the {commas(p.nhsNurses + p.nhsDoctors)} today
+            {commas(p.nhsNurses + p.nhsDoctors)} work in the NHS today
           </p>
         </div>
         <div className="payfor-card">
           <p className="payfor-value">{teacherMultiple.toFixed(1)}×</p>
           <p className="payfor-label">the teachers in our schools</p>
           <p className="payfor-note">
-            nearly double the {commas(p.teacherCount)} teaching today
+            {commas(p.teacherCount)} teach in England today
           </p>
         </div>
         <div className="payfor-card">
@@ -66,7 +65,7 @@ export default function WhatItPaysFor() {
         <p>{p.note}</p>
         <ul>
           <li>
-            Extra revenue: the top 0.1% pay the median {Math.round(medianRate * 100)}%
+            Extra revenue: the top 0.1% pay your {Math.round(incomeRate * 100)}%
             income rate on the {gbp(econIncome)} their {gbp(top01Wealth)} of wealth
             earns, instead of ~{Math.round(bill.pctOfEconomicIncome * 100)}% = {gbp(extra)}/yr
           </li>

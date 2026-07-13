@@ -4,8 +4,6 @@ import type { Basis } from "./types";
 import { useNumber } from "./useNumber";
 import WhereDoYouSit from "./components/WhereDoYouSit";
 import TaxBurden from "./components/TaxBurden";
-import TaxTake from "./components/TaxTake";
-import WhatItPaysFor from "./components/WhatItPaysFor";
 
 export default function App() {
   // Only the corrected (undercount-adjusted) figures are shown.
@@ -92,10 +90,6 @@ export default function App() {
         </section>
 
         <WhereDoYouSit netWealth={netWealth} />
-
-        <TaxTake />
-
-        <WhatItPaysFor />
       </main>
 
       <section className="sources">
