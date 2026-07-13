@@ -27,13 +27,11 @@ export default function App() {
       "oxfam_takers",
       "obr_receipts",
       "hmrc_reckoner",
-      "commons_defence",
+      "hmrc_stamp",
       "gov_pay",
       "nhs_workforce",
       "school_workforce",
-      "ifs_tuition",
       "police_workforce",
-      "health_foundation",
       "nhf_homes",
     ]);
     for (const f of headlines.figures) {

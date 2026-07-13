@@ -96,6 +96,12 @@ export interface TaxData {
   payFor: {
     taxCutPerPennyGbp: number;
     taxCutSourceId: string;
+    corpTaxPerPointGbp: number;
+    corpTaxRatePct: number;
+    vatPerPointGbp: number;
+    vatRatePct: number;
+    stampDutyGbp: number;
+    stampDutySourceId: string;
     nurseCostGbp: number;
     doctorCostGbp: number;
     teacherCostGbp: number;

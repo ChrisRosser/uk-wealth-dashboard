@@ -210,6 +210,12 @@ def build() -> None:
         "payFor": {
             "taxCutPerPennyGbp": 6_900_000_000,   # HMRC: 1p on basic rate ≈ £6.9bn
             "taxCutSourceId": "hmrc_reckoner",
+            "corpTaxPerPointGbp": 3_600_000_000,  # ≈ 1pp main rate (HMRC reckoner)
+            "corpTaxRatePct": 25,
+            "vatPerPointGbp": 8_500_000_000,      # ≈ 1pp standard rate (HMRC reckoner)
+            "vatRatePct": 20,
+            "stampDutyGbp": 10_400_000_000,       # residential SDLT, England 2024-25
+            "stampDutySourceId": "hmrc_stamp",
             "nurseCostGbp": 45_000,               # salary + pension + employer NI ≈
             "doctorCostGbp": 100_000,
             "teacherCostGbp": 47_000,

@@ -16,15 +16,17 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const econIncome = top01Wealth * (t.billionaire.economicReturnPct / 100);
   const extra = Math.max(0, econIncome * (incomeRate - bill.pctOfEconomicIncome));
 
-  const taxCutPence = Math.round(extra / p.taxCutPerPennyGbp);
-  const nhsCost = p.nhsNurses * p.nurseCostGbp + p.nhsDoctors * p.doctorCostGbp;
-  const nhsMultiple = 1 + extra / nhsCost;
-  const teacherMultiple = 1 + extra / (p.teacherCount * p.teacherCostGbp);
+  // Tax cuts
+  const incomeCutP = Math.round(extra / p.taxCutPerPennyGbp);
+  const corpCutP = Math.round(extra / p.corpTaxPerPointGbp);
+  const vatCutP = Math.round(extra / p.vatPerPointGbp);
+  const stampMultiple = extra / p.stampDutyGbp;
+
+  // Spending
+  const nhsMultiple = 1 + extra / (p.nhsNurses * p.nurseCostGbp + p.nhsDoctors * p.doctorCostGbp);
   const policeMultiple = 1 + extra / (p.policeOfficers * p.policeCostGbp);
-  const uniMultiple = extra / p.freeUniversityGbp;
-  const socialCareMultiple = extra / p.socialCareGbp;
+  const teacherMultiple = 1 + extra / (p.teacherCount * p.teacherCostGbp);
   const homes = extra / p.homeGrantGbp;
-  const defencePct = Math.round((extra / p.defenceBudgetGbp) * 100);
 
   return (
     <section className="taketake">
@@ -33,15 +35,39 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
         This isn&apos;t about a bigger state. That extra{" "}
         <strong>{gbp(extra)}</strong> a year — from the very wealthiest paying the
         same share of their income in tax as you already do — is a choice. Each
-        year, the same money could instead fund any one of these:
+        year, the same money could <strong>cut taxes</strong>:
       </p>
 
       <div className="payfor">
         <div className="payfor-card payfor-card-lead">
-          <p className="payfor-value">{taxCutPence}p</p>
-          <p className="payfor-label">off the basic rate of income tax</p>
-          <p className="payfor-note">20% → {20 - taxCutPence}%, for every worker</p>
+          <p className="payfor-value">{incomeCutP}p</p>
+          <p className="payfor-label">off income tax</p>
+          <p className="payfor-note">basic rate 20% → {20 - incomeCutP}%</p>
         </div>
+        <div className="payfor-card payfor-card-lead">
+          <p className="payfor-value">{corpCutP}p</p>
+          <p className="payfor-label">off corporation tax</p>
+          <p className="payfor-note">
+            {p.corpTaxRatePct}% → {p.corpTaxRatePct - corpCutP}%, for every business
+          </p>
+        </div>
+        <div className="payfor-card payfor-card-lead">
+          <p className="payfor-value">{vatCutP}p</p>
+          <p className="payfor-label">off VAT</p>
+          <p className="payfor-note">
+            {p.vatRatePct}% → {p.vatRatePct - vatCutP}%, on the high street
+          </p>
+        </div>
+        <div className="payfor-card payfor-card-lead">
+          <p className="payfor-value">{stampMultiple.toFixed(1)}×</p>
+          <p className="payfor-label">abolish stamp duty</p>
+          <p className="payfor-note">over the ~£{Math.round(p.stampDutyGbp / 1e9)}bn it raises</p>
+        </div>
+      </div>
+
+      <p className="tax-intro">…or spend it on the services people value most:</p>
+
+      <div className="payfor">
         <div className="payfor-card">
           <p className="payfor-value">{nhsMultiple.toFixed(1)}×</p>
           <p className="payfor-label">the doctors &amp; nurses in the NHS</p>
@@ -59,39 +85,12 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
         <div className="payfor-card">
           <p className="payfor-value">{teacherMultiple.toFixed(1)}×</p>
           <p className="payfor-label">the teachers in our schools</p>
-          <p className="payfor-note">
-            {commas(p.teacherCount)} teach in England today
-          </p>
-        </div>
-        <div className="payfor-card">
-          <p className="payfor-value">{uniMultiple.toFixed(1)}×</p>
-          <p className="payfor-label">free university tuition</p>
-          <p className="payfor-note">
-            over the ~£{Math.round(p.freeUniversityGbp / 1e9)}bn cost of scrapping
-            fees (IFS)
-          </p>
-        </div>
-        <div className="payfor-card">
-          <p className="payfor-value">{socialCareMultiple.toFixed(1)}×</p>
-          <p className="payfor-label">free social care</p>
-          <p className="payfor-note">
-            over the ~£{Math.round(p.socialCareGbp / 1e9)}bn cost of free personal
-            care (Health Foundation)
-          </p>
+          <p className="payfor-note">{commas(p.teacherCount)} teach in England today</p>
         </div>
         <div className="payfor-card">
           <p className="payfor-value">{roundish(homes)}</p>
           <p className="payfor-label">new social homes a year</p>
-          <p className="payfor-note">
-            at the ~£{Math.round(p.homeGrantGbp / 1000)}k grant each (NHF)
-          </p>
-        </div>
-        <div className="payfor-card">
-          <p className="payfor-value">+{defencePct}%</p>
-          <p className="payfor-label">bigger defence budget</p>
-          <p className="payfor-note">
-            on top of today&apos;s £{Math.round(p.defenceBudgetGbp / 1e9)}bn
-          </p>
+          <p className="payfor-note">at the ~£{Math.round(p.homeGrantGbp / 1000)}k grant each (NHF)</p>
         </div>
       </div>
 
@@ -104,16 +103,17 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
             income rate on the {gbp(econIncome)} their {gbp(top01Wealth)} of wealth
             earns, instead of ~{Math.round(bill.pctOfEconomicIncome * 100)}% = {gbp(extra)}/yr
           </li>
-          <li>Tax cut: {gbp(p.taxCutPerPennyGbp)} for each 1p off the basic rate (HMRC)</li>
+          <li>
+            Tax cuts (HMRC ready reckoner): {gbp(p.taxCutPerPennyGbp)} per 1p on income
+            tax, {gbp(p.vatPerPointGbp)} per VAT point, {gbp(p.corpTaxPerPointGbp)} per
+            corporation-tax point; stamp duty raises ~{gbp(p.stampDutyGbp)}
+          </li>
           <li>
             NHS: {commas(p.nhsDoctors)} doctors + {commas(p.nhsNurses)} nurses, at
-            ~{gbp(p.doctorCostGbp)} / {gbp(p.nurseCostGbp)} full cost each
+            ~{gbp(p.doctorCostGbp)} / {gbp(p.nurseCostGbp)} each; police {commas(p.policeOfficers)}{" "}
+            at ~{gbp(p.policeCostGbp)}; teachers {commas(p.teacherCount)} at ~{gbp(p.teacherCostGbp)}
           </li>
-          <li>Schools: {commas(p.teacherCount)} teachers at ~{gbp(p.teacherCostGbp)} each</li>
-          <li>Police: {commas(p.policeOfficers)} officers at ~{gbp(p.policeCostGbp)} full cost each</li>
-          <li>Free university {gbp(p.freeUniversityGbp)} (IFS) · free social care {gbp(p.socialCareGbp)} (Health Foundation)</li>
           <li>Social homes at ~{gbp(p.homeGrantGbp)} government grant each (NHF)</li>
-          <li>Defence: {gbp(p.defenceBudgetGbp)} budget (2024–25)</li>
         </ul>
       </details>
     </section>

@@ -152,6 +152,12 @@
   "payFor": {
     "taxCutPerPennyGbp": 6900000000,
     "taxCutSourceId": "hmrc_reckoner",
+    "corpTaxPerPointGbp": 3600000000,
+    "corpTaxRatePct": 25,
+    "vatPerPointGbp": 8500000000,
+    "vatRatePct": 20,
+    "stampDutyGbp": 10400000000,
+    "stampDutySourceId": "hmrc_stamp",
     "nurseCostGbp": 45000,
     "doctorCostGbp": 100000,
     "teacherCostGbp": 47000,

@@ -176,12 +176,21 @@ SOURCES = {
     },
     "hmrc_reckoner": {
         "title": "Direct effects of illustrative tax changes — 1p on the basic "
-                 "rate of income tax ≈ £6.9bn",
+                 "rate ≈ £6.9bn, ~£8.5bn per VAT point, ~£3.6bn per corporation "
+                 "tax point",
         "publisher": "GOV.UK / HMRC",
         "published": "2025-06",
         "licence": "Open Government Licence v3.0",
         "url": "https://www.gov.uk/government/statistics/"
                "direct-effects-of-illustrative-tax-changes",
+    },
+    "hmrc_stamp": {
+        "title": "Annual Stamp Tax Statistics — residential SDLT £10.4bn "
+                 "(England, 2024-25)",
+        "publisher": "GOV.UK / HMRC",
+        "published": "2025",
+        "licence": "Open Government Licence v3.0",
+        "url": "https://www.gov.uk/government/statistics/uk-stamp-tax-statistics",
     },
     "commons_defence": {
         "title": "UK defence spending: £60.2bn in 2024-25",
