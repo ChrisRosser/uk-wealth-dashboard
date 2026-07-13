@@ -5,6 +5,7 @@ import { useNumber } from "./useNumber";
 import WhereDoYouSit from "./components/WhereDoYouSit";
 import TaxBurden from "./components/TaxBurden";
 import TaxTake from "./components/TaxTake";
+import TaxWealth from "./components/TaxWealth";
 
 export default function App() {
   // Only the corrected (undercount-adjusted) figures are shown.
@@ -88,6 +89,8 @@ export default function App() {
         <WhereDoYouSit netWealth={netWealth} />
 
         <TaxTake />
+
+        <TaxWealth />
       </main>
 
       <section className="sources">
