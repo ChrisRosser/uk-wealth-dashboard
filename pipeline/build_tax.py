@@ -214,6 +214,11 @@ def build() -> None:
             "doctorCostGbp": 100_000,
             "teacherCostGbp": 47_000,
             "staffSourceId": "gov_pay",
+            "nhsNurses": 467_000,                 # nurses & midwives, all settings
+            "nhsDoctors": 216_000,                # doctors, all settings (incl GPs)
+            "teacherCount": 513_400,              # England, headcount 2024
+            "workforceSourceId": "nhs_workforce",
+            "teacherSourceId": "school_workforce",
             "defenceBudgetGbp": 60_200_000_000,   # 2024-25, Commons Library
             "defenceSourceId": "commons_defence",
             "note": "Illustrative equivalents for the extra revenue. Staff "

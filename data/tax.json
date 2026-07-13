@@ -156,6 +156,11 @@
     "doctorCostGbp": 100000,
     "teacherCostGbp": 47000,
     "staffSourceId": "gov_pay",
+    "nhsNurses": 467000,
+    "nhsDoctors": 216000,
+    "teacherCount": 513400,
+    "workforceSourceId": "nhs_workforce",
+    "teacherSourceId": "school_workforce",
     "defenceBudgetGbp": 60200000000,
     "defenceSourceId": "commons_defence",
     "note": "Illustrative equivalents for the extra revenue. Staff figures are approximate full employment cost (salary + pension + employer NI); each option is the whole sum spent one way, not all at once."

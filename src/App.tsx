@@ -31,6 +31,8 @@ export default function App() {
       "hmrc_reckoner",
       "commons_defence",
       "gov_pay",
+      "nhs_workforce",
+      "school_workforce",
     ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);

@@ -197,6 +197,24 @@ SOURCES = {
         "url": "https://www.healthcareers.nhs.uk/working-health/working-nhs/"
                "nhs-pay-and-benefits/agenda-change-pay-rates",
     },
+    "nhs_workforce": {
+        "title": "The NHS workforce in numbers — ~216,000 doctors and ~467,000 "
+                 "nurses & midwives (2024)",
+        "publisher": "Nuffield Trust / NHS England Digital",
+        "published": "2024",
+        "licence": "Cite with attribution.",
+        "url": "https://www.nuffieldtrust.org.uk/resource/"
+               "the-nhs-workforce-in-numbers",
+    },
+    "school_workforce": {
+        "title": "School workforce in England — 513,400 teachers (headcount, "
+                 "November 2024)",
+        "publisher": "GOV.UK / Department for Education",
+        "published": "2025",
+        "licence": "Open Government Licence v3.0",
+        "url": "https://explore-education-statistics.service.gov.uk/"
+               "find-statistics/school-workforce-in-england/2024",
+    },
 }
 
 

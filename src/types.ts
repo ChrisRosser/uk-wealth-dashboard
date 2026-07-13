@@ -100,6 +100,11 @@ export interface TaxData {
     doctorCostGbp: number;
     teacherCostGbp: number;
     staffSourceId: string;
+    nhsNurses: number;
+    nhsDoctors: number;
+    teacherCount: number;
+    workforceSourceId: string;
+    teacherSourceId: string;
     defenceBudgetGbp: number;
     defenceSourceId: string;
     note: string;
