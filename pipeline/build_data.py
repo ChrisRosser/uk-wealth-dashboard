@@ -400,7 +400,7 @@ def build() -> None:
                 "geography": "GB", "unit": "household", "basis": "survey",
                 "sourceId": "ons_was_r8",
                 "note": "Half of all households share barely a tenth of the "
-                        "wealth — less than the wealthiest 1% alone hold.",
+                        "wealth — less than half the wealthiest 1% alone hold.",
             },
             {
                 "id": "wealth_gini",

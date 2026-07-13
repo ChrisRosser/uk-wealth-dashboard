@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-07-12",
+    "generated": "2026-07-13",
     "pipelineVersion": "1.0.0",
     "period": "2020-04/2022-03",
     "source": "ONS Wealth & Assets Survey Round 8 + fitted Pareto tail"
@@ -76,7 +76,7 @@
       "unit": "household",
       "basis": "survey",
       "sourceId": "ons_was_r8",
-      "note": "Half of all households share barely a tenth of the wealth — less than the wealthiest 1% alone hold."
+      "note": "Half of all households share barely a tenth of the wealth — less than half the wealthiest 1% alone hold."
     },
     {
       "id": "wealth_gini",
