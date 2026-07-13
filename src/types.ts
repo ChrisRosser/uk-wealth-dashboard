@@ -93,6 +93,17 @@ export interface TaxData {
     totalHouseholdWealthGbp: number;
     note: string;
   };
+  payFor: {
+    taxCutPerPennyGbp: number;
+    taxCutSourceId: string;
+    nurseCostGbp: number;
+    doctorCostGbp: number;
+    teacherCostGbp: number;
+    staffSourceId: string;
+    defenceBudgetGbp: number;
+    defenceSourceId: string;
+    note: string;
+  };
 }
 
 export interface Distribution {

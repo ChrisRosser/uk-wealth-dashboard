@@ -5,7 +5,7 @@ import { useNumber } from "./useNumber";
 import WhereDoYouSit from "./components/WhereDoYouSit";
 import TaxBurden from "./components/TaxBurden";
 import TaxTake from "./components/TaxTake";
-import TaxWealth from "./components/TaxWealth";
+import WhatItPaysFor from "./components/WhatItPaysFor";
 
 export default function App() {
   // Only the corrected (undercount-adjusted) figures are shown.
@@ -28,6 +28,9 @@ export default function App() {
       "ubs_billionaire",
       "oxfam_takers",
       "obr_receipts",
+      "hmrc_reckoner",
+      "commons_defence",
+      "gov_pay",
     ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);
@@ -90,7 +93,7 @@ export default function App() {
 
         <TaxTake />
 
-        <TaxWealth />
+        <WhatItPaysFor />
       </main>
 
       <section className="sources">

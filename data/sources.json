@@ -81,5 +81,24 @@
     "published": "2025",
     "licence": "Cite with attribution.",
     "url": "https://obr.uk/forecasts-in-depth/brief-guides-and-explainers/public-finances/"
+  },
+  "hmrc_reckoner": {
+    "title": "Direct effects of illustrative tax changes — 1p on the basic rate of income tax ≈ £6.9bn",
+    "publisher": "GOV.UK / HMRC",
+    "published": "2025-06",
+    "licence": "Open Government Licence v3.0",
+    "url": "https://www.gov.uk/government/statistics/direct-effects-of-illustrative-tax-changes"
+  },
+  "commons_defence": {
+    "title": "UK defence spending: £60.2bn in 2024-25",
+    "publisher": "House of Commons Library",
+    "licence": "Open Parliament Licence.",
+    "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-8175/"
+  },
+  "gov_pay": {
+    "title": "NHS Agenda for Change and teacher pay scales (salary plus employer pension and NI)",
+    "publisher": "GOV.UK / NHS",
+    "licence": "Open Government Licence v3.0",
+    "url": "https://www.healthcareers.nhs.uk/working-health/working-nhs/nhs-pay-and-benefits/agenda-change-pay-rates"
   }
 }

@@ -787,6 +787,47 @@ h1 {
   color: var(--muted);
 }
 
+.payfor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.payfor-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.payfor-card-lead {
+  border-color: var(--accent-strong);
+}
+
+.payfor-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.payfor-card-lead .payfor-value {
+  color: var(--accent-strong);
+}
+
+.payfor-label {
+  margin: 0.4rem 0 0;
+  font-weight: 600;
+}
+
+.payfor-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 .sources h2 {
   font-size: 1.1rem;
 }

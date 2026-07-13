@@ -206,6 +206,21 @@ def build() -> None:
                     "rate. Uses this dashboard's own top-rate and return "
                     "assumptions, so treat it as illustrative, not a forecast.",
         },
+        # CURATED — "what could the extra revenue pay for" unit costs.
+        "payFor": {
+            "taxCutPerPennyGbp": 6_900_000_000,   # HMRC: 1p on basic rate ≈ £6.9bn
+            "taxCutSourceId": "hmrc_reckoner",
+            "nurseCostGbp": 45_000,               # salary + pension + employer NI ≈
+            "doctorCostGbp": 100_000,
+            "teacherCostGbp": 47_000,
+            "staffSourceId": "gov_pay",
+            "defenceBudgetGbp": 60_200_000_000,   # 2024-25, Commons Library
+            "defenceSourceId": "commons_defence",
+            "note": "Illustrative equivalents for the extra revenue. Staff "
+                    "figures are approximate full employment cost (salary + "
+                    "pension + employer NI); each option is the whole sum spent "
+                    "one way, not all at once.",
+        },
     }
 
     validate(tax)
