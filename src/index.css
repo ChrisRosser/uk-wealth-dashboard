@@ -44,7 +44,6 @@ h1 {
 
 .lede {
   color: var(--muted);
-  max-width: 42ch;
   font-size: 1.05rem;
 }
 
@@ -82,7 +81,6 @@ h1 {
   font-size: 0.85rem;
   color: var(--muted);
   margin: 0.75rem 0 0;
-  max-width: 48ch;
 }
 
 .distribution {
@@ -164,7 +162,6 @@ h1 {
 
 .wdys-intro {
   color: var(--muted);
-  max-width: 52ch;
   margin: 0 0 1.25rem;
 }
 
@@ -221,7 +218,6 @@ h1 {
 .wdys-result {
   font-size: 1.1rem;
   line-height: 1.6;
-  max-width: 60ch;
   margin: 0 0 1.5rem;
 }
 
@@ -294,7 +290,6 @@ h1 {
 .wdys-foot {
   font-size: 0.82rem;
   color: var(--muted);
-  max-width: 60ch;
   margin: 1rem 0 0;
 }
 
@@ -310,7 +305,6 @@ h1 {
 
 .tax-intro {
   color: var(--muted);
-  max-width: 60ch;
   margin: 0 0 1.5rem;
 }
 
@@ -425,7 +419,6 @@ h1 {
 
 .tax-return-note {
   margin: 0 0 1.75rem;
-  max-width: 640px;
   font-size: 0.85rem;
   color: var(--muted);
   line-height: 1.5;
@@ -704,7 +697,6 @@ h1 {
   border-left: 3px solid var(--danger);
   padding: 0.9rem 1.1rem;
   border-radius: 0 10px 10px 0;
-  max-width: 62ch;
   font-size: 0.98rem;
   line-height: 1.55;
 }
