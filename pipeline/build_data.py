@@ -215,6 +215,15 @@ SOURCES = {
         "url": "https://explore-education-statistics.service.gov.uk/"
                "find-statistics/school-workforce-in-england/2024",
     },
+    "ifs_tuition": {
+        "title": "Abolishing university tuition fees in England ≈ £8-11bn a year",
+        "publisher": "Institute for Fiscal Studies",
+        "published": "2023",
+        "licence": "Cite with attribution.",
+        "url": "https://ifs.org.uk/articles/"
+               "labours-higher-education-proposals-will-cost-ps8bn-year-"
+               "although-increase-deficit-more",
+    },
 }
 
 

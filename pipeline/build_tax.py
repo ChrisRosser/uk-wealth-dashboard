@@ -219,6 +219,8 @@ def build() -> None:
             "teacherCount": 513_400,              # England, headcount 2024
             "workforceSourceId": "nhs_workforce",
             "teacherSourceId": "school_workforce",
+            "freeUniversityGbp": 10_000_000_000,  # abolish tuition fees, IFS ~£8-11bn
+            "freeUniversitySourceId": "ifs_tuition",
             "defenceBudgetGbp": 60_200_000_000,   # 2024-25, Commons Library
             "defenceSourceId": "commons_defence",
             "note": "Illustrative equivalents for the extra revenue. Staff "

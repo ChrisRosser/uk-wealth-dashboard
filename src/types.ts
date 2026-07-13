@@ -105,6 +105,8 @@ export interface TaxData {
     teacherCount: number;
     workforceSourceId: string;
     teacherSourceId: string;
+    freeUniversityGbp: number;
+    freeUniversitySourceId: string;
     defenceBudgetGbp: number;
     defenceSourceId: string;
     note: string;

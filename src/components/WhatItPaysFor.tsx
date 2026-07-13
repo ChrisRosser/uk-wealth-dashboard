@@ -19,6 +19,7 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const nhsCost = p.nhsNurses * p.nurseCostGbp + p.nhsDoctors * p.doctorCostGbp;
   const nhsMultiple = 1 + extra / nhsCost;
   const teacherMultiple = 1 + extra / (p.teacherCount * p.teacherCostGbp);
+  const uniMultiple = extra / p.freeUniversityGbp;
   const defencePct = Math.round((extra / p.defenceBudgetGbp) * 100);
 
   return (
@@ -52,6 +53,14 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
           </p>
         </div>
         <div className="payfor-card">
+          <p className="payfor-value">{uniMultiple.toFixed(1)}×</p>
+          <p className="payfor-label">free university tuition</p>
+          <p className="payfor-note">
+            over the ~£{Math.round(p.freeUniversityGbp / 1e9)}bn cost of scrapping
+            fees (IFS)
+          </p>
+        </div>
+        <div className="payfor-card">
           <p className="payfor-value">+{defencePct}%</p>
           <p className="payfor-label">bigger defence budget</p>
           <p className="payfor-note">
@@ -75,6 +84,7 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
             ~{gbp(p.doctorCostGbp)} / {gbp(p.nurseCostGbp)} full cost each
           </li>
           <li>Schools: {commas(p.teacherCount)} teachers at ~{gbp(p.teacherCostGbp)} each</li>
+          <li>Free university: ~{gbp(p.freeUniversityGbp)}/yr to abolish tuition fees (IFS)</li>
           <li>Defence: {gbp(p.defenceBudgetGbp)} budget (2024–25)</li>
         </ul>
       </details>

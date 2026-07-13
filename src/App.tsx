@@ -31,6 +31,7 @@ export default function App() {
       "gov_pay",
       "nhs_workforce",
       "school_workforce",
+      "ifs_tuition",
     ]);
     for (const f of headlines.figures) {
       const r = resolveValue(f, basis);

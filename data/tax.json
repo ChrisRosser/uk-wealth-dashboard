@@ -161,6 +161,8 @@
     "teacherCount": 513400,
     "workforceSourceId": "nhs_workforce",
     "teacherSourceId": "school_workforce",
+    "freeUniversityGbp": 10000000000,
+    "freeUniversitySourceId": "ifs_tuition",
     "defenceBudgetGbp": 60200000000,
     "defenceSourceId": "commons_defence",
     "note": "Illustrative equivalents for the extra revenue. Staff figures are approximate full employment cost (salary + pension + employer NI); each option is the whole sum spent one way, not all at once."
