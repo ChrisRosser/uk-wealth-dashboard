@@ -11,3 +11,10 @@ pipeline/raw/
 __pycache__/
 *.pyc
 .venv/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
