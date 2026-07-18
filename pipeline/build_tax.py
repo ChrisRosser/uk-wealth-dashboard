@@ -206,6 +206,26 @@ def build() -> None:
                     "rate. Uses this dashboard's own top-rate and return "
                     "assumptions, so treat it as illustrative, not a forecast.",
         },
+        # CURATED — the most prominent campaign proposal, for comparison with
+        # the personalised scenarios: 2%/yr on individual wealth over £10m.
+        "wealthTax2pct": {
+            "sourceId": "tax_justice_uk",
+            "ratePct": 2,
+            "thresholdGbp": 10_000_000,
+            "revenueGbp": 24_000_000_000,   # static estimate, Tax Justice UK
+            "peopleAffected": 20_000,       # ~0.04% of the population
+            "millionairesSupportPct": 65,   # Patriotic Millionaires UK polling
+            "millionairesSourceId": "patriotic_millionaires",
+            "votersOpposePct": 13,          # YouGov, July 2025
+            "pollSourceId": "yougov_2025",
+            "migrationSourceId": "millionaire_migration",
+            "note": "Tax Justice UK / Patriotic Millionaires proposal: 2% a year "
+                    "on individual wealth above £10m, affecting ~20,000 people. "
+                    "£24bn is a static estimate; behavioural response would trim "
+                    "it. On flight: the literature finds exit rare and avoidance "
+                    "common; Norway's 2022 rise saw some large fortunes leave but "
+                    "revenue still rose.",
+        },
         # CURATED — "what could the extra revenue pay for" unit costs.
         "payFor": {
             "taxCutPerPennyGbp": 6_900_000_000,   # HMRC: 1p on basic rate ≈ £6.9bn
@@ -236,6 +256,12 @@ def build() -> None:
             "socialCareSourceId": "health_foundation",
             "homeGrantGbp": 140_000,              # gov grant per social home (NHF/CEBR)
             "homeSourceId": "nhf_homes",
+            "homePaybackSourceId": "shelter_cebr",  # 90k homes/yr breaks even in 3 yrs
+            "childPovertyGbp": 3_000_000_000,     # +£17/wk UC child element (CPAG)
+            "childPovertyChildren": 350_000,      # children lifted out of poverty
+            "childPovertySourceId": "cpag",
+            "sureStartGbp": 2_700_000_000,        # Sure Start peak spend, today's prices (IFS)
+            "sureStartSourceId": "ifs_surestart",
             "defenceBudgetGbp": 60_200_000_000,   # 2024-25, Commons Library
             "defenceSourceId": "commons_defence",
             "note": "Illustrative equivalents for the extra revenue. Staff "

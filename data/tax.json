@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-07-13",
+    "generated": "2026-07-18",
     "pipelineVersion": "1.0.0",
     "measuredSourceId": "ons_etb",
     "period": "FYE 2024 (2023/24)",
@@ -149,6 +149,19 @@
     "totalHouseholdWealthGbp": 13568000000000,
     "note": "Illustrative. Most tax already comes from ordinary households paying about a third of their income. The shortfall is at the very top: this compares the tax the wealthiest 0.1% pay on the income their wealth earns with what they would pay at the median household's effective rate. Uses this dashboard's own top-rate and return assumptions, so treat it as illustrative, not a forecast."
   },
+  "wealthTax2pct": {
+    "sourceId": "tax_justice_uk",
+    "ratePct": 2,
+    "thresholdGbp": 10000000,
+    "revenueGbp": 24000000000,
+    "peopleAffected": 20000,
+    "millionairesSupportPct": 65,
+    "millionairesSourceId": "patriotic_millionaires",
+    "votersOpposePct": 13,
+    "pollSourceId": "yougov_2025",
+    "migrationSourceId": "millionaire_migration",
+    "note": "Tax Justice UK / Patriotic Millionaires proposal: 2% a year on individual wealth above £10m, affecting ~20,000 people. £24bn is a static estimate; behavioural response would trim it. On flight: the literature finds exit rare and avoidance common; Norway's 2022 rise saw some large fortunes leave but revenue still rose."
+  },
   "payFor": {
     "taxCutPerPennyGbp": 6900000000,
     "taxCutSourceId": "hmrc_reckoner",
@@ -178,6 +191,12 @@
     "socialCareSourceId": "health_foundation",
     "homeGrantGbp": 140000,
     "homeSourceId": "nhf_homes",
+    "homePaybackSourceId": "shelter_cebr",
+    "childPovertyGbp": 3000000000,
+    "childPovertyChildren": 350000,
+    "childPovertySourceId": "cpag",
+    "sureStartGbp": 2700000000,
+    "sureStartSourceId": "ifs_surestart",
     "defenceBudgetGbp": 60200000000,
     "defenceSourceId": "commons_defence",
     "note": "Illustrative equivalents for the extra revenue. Staff figures are approximate full employment cost (salary + pension + employer NI); each option is the whole sum spent one way, not all at once."

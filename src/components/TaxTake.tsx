@@ -42,6 +42,7 @@ function Scenario({
 
 export default function TaxTake({ incomeRate, wealthRate }: Props) {
   const tt = t.taxTake;
+  const w2 = t.wealthTax2pct;
   const bill = useMemo(() => billionaire(t), []);
   const top01Wealth = tt.totalHouseholdWealthGbp * tt.top01WealthShare;
   const econIncome = top01Wealth * (t.billionaire.economicReturnPct / 100);
@@ -81,6 +82,39 @@ export default function TaxTake({ incomeRate, wealthRate }: Props) {
           />
         </>
       )}
+
+      <p className="tax-intro">
+        You don&apos;t have to take this dashboard&apos;s word for the scale. The
+        most prominent proposal — a <strong>{w2.ratePct}% a year tax on wealth
+        over {gbp(w2.thresholdGbp)}</strong>, touching about{" "}
+        {w2.peopleAffected.toLocaleString("en-GB")} people (0.04% of the
+        population) — is independently estimated to raise{" "}
+        <strong>{gbp(w2.revenueGbp)}</strong> a year.{" "}
+        <strong>{w2.millionairesSupportPct}% of UK millionaires</strong> support
+        it; just {w2.votersOpposePct}% of voters oppose it.
+      </p>
+
+      <Scenario
+        label={`A ${w2.ratePct}% wealth tax over ${gbp(w2.thresholdGbp)} (Tax Justice UK)`}
+        take={tt.currentReceiptsGbp + w2.revenueGbp}
+        extra={w2.revenueGbp}
+      />
+
+      <details className="tax-assumptions">
+        <summary>Wouldn&apos;t they just leave?</summary>
+        <p>
+          Far less than the headlines suggest. Across the academic literature,
+          exit is rare and avoidance is common: US millionaires move between
+          states <em>less</em> than the general population (2.4% vs 2.9% a
+          year), despite zero-tax states existing. When Norway raised its wealth
+          tax in 2022 some large fortunes did leave — but revenue still rose,
+          and researchers found no effect on firms&apos; investment or
+          employment. And design matters most of all: land and property
+          can&apos;t emigrate, and a one-off levy assessed on past wealth (the
+          Wealth Tax Commission&apos;s preferred design) can&apos;t be dodged by
+          leaving at all.
+        </p>
+      </details>
 
       <details className="tax-assumptions">
         <summary>How this is worked out</summary>

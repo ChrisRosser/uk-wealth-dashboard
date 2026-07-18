@@ -27,6 +27,8 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
   const policeMultiple = 1 + extra / (p.policeOfficers * p.policeCostGbp);
   const teacherMultiple = 1 + extra / (p.teacherCount * p.teacherCostGbp);
   const homes = extra / p.homeGrantGbp;
+  const povertyMultiple = extra / p.childPovertyGbp;
+  const sureStartMultiple = extra / p.sureStartGbp;
 
   return (
     <section className="taketake">
@@ -92,7 +94,27 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
         <div className="payfor-card">
           <p className="payfor-value">{roundish(homes)}</p>
           <p className="payfor-label">new council houses a year</p>
-          <p className="payfor-note">at the ~£{Math.round(p.homeGrantGbp / 1000)}k grant each (NHF)</p>
+          <p className="payfor-note">
+            ~£{Math.round(p.homeGrantGbp / 1000)}k grant each; a build programme
+            repays itself within 3 years (CEBR)
+          </p>
+        </div>
+        <div className="payfor-card">
+          <p className="payfor-value">{povertyMultiple.toFixed(0)}×</p>
+          <p className="payfor-label">
+            the cost of lifting {commas(p.childPovertyChildren)} children out of poverty
+          </p>
+          <p className="payfor-note">
+            via £17/week on Universal Credit&apos;s child element (CPAG)
+          </p>
+        </div>
+        <div className="payfor-card">
+          <p className="payfor-value">{sureStartMultiple.toFixed(0)}×</p>
+          <p className="payfor-label">Sure Start rebuilt in every community</p>
+          <p className="payfor-note">
+            IFS: +3 GCSE grades for the poorest children; NHS savings repaid a
+            third of its cost
+          </p>
         </div>
       </div>
 
@@ -115,7 +137,16 @@ export default function WhatItPaysFor({ incomeRate }: { incomeRate: number }) {
             ~{gbp(p.doctorCostGbp)} / {gbp(p.nurseCostGbp)} each; police {commas(p.policeOfficers)}{" "}
             at ~{gbp(p.policeCostGbp)}; teachers {commas(p.teacherCount)} at ~{gbp(p.teacherCostGbp)}
           </li>
-          <li>Council houses at ~{gbp(p.homeGrantGbp)} government grant each (NHF)</li>
+          <li>
+            Council houses at ~{gbp(p.homeGrantGbp)} government grant each (NHF);
+            CEBR find a 90,000-homes-a-year programme breaks even within 3 years
+          </li>
+          <li>
+            Child poverty: {gbp(p.childPovertyGbp)} on the UC child element lifts{" "}
+            {commas(p.childPovertyChildren)} children out of poverty (CPAG); Sure
+            Start at its peak cost ~{gbp(p.sureStartGbp)} a year in today&apos;s
+            prices (IFS)
+          </li>
         </ul>
       </details>
     </section>

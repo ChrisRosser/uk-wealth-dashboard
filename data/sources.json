@@ -96,6 +96,55 @@
     "licence": "Open Government Licence v3.0",
     "url": "https://www.gov.uk/government/statistics/uk-stamp-tax-statistics"
   },
+  "tax_justice_uk": {
+    "title": "Taxing Wealth — a 2% tax on wealth over £10m (≈20,000 people) would raise ~£24bn a year",
+    "publisher": "Tax Justice UK",
+    "licence": "Cite with attribution.",
+    "url": "https://taxjustice.uk/campaign/taxing-wealth/",
+    "caveat": "Campaign estimate; static costing, before behavioural response."
+  },
+  "patriotic_millionaires": {
+    "title": "Policy recommendations — 65% of UK millionaires support a 2% tax on assets over £10m",
+    "publisher": "Patriotic Millionaires UK",
+    "published": "2025",
+    "url": "https://patrioticmillionaires.uk/latest-news/policy-recommendations-2025"
+  },
+  "yougov_2025": {
+    "title": "Wealth-tax polling — 75% support a 2% tax over £10m; 13% opposed",
+    "publisher": "YouGov",
+    "published": "July 2025",
+    "url": "https://yougov.co.uk/politics/articles/53468-can-the-uks-financial-problems-be-fixed-solely-by-taxing-the-rich"
+  },
+  "millionaire_migration": {
+    "title": "Do billionaires really move to avoid wealth taxes? Exit is rare, avoidance is common",
+    "publisher": "Forbes (Teresa Ghilarducci)",
+    "published": "2025",
+    "url": "https://www.forbes.com/sites/teresaghilarducci/2025/12/29/do-wealth-taxes-really-make-billionaires-leave/"
+  },
+  "cpag": {
+    "title": "Child-poverty costings — £3bn on Universal Credit's child element lifts 350,000 children out of poverty",
+    "publisher": "Child Poverty Action Group",
+    "published": "2025",
+    "url": "https://cpag.org.uk/news/new-costings-scrapping-two-child-limit-far-most-cost-effective-way-cut-child-poverty"
+  },
+  "ifs_surestart": {
+    "title": "Sure Start evaluation — +3 GCSE grades for the poorest children; NHS savings offset ~a third of its cost",
+    "publisher": "Institute for Fiscal Studies",
+    "published": "2025",
+    "url": "https://ifs.org.uk/news/sure-starts-wide-ranging-and-long-lasting-benefits-highlight-impact-integrated-early-years"
+  },
+  "shelter_cebr": {
+    "title": "Brick by Brick (CEBR modelling) — 90,000 social homes a year breaks even within 3 years, £51.2bn net benefit over 30",
+    "publisher": "Shelter / National Housing Federation",
+    "url": "https://england.shelter.org.uk/support_us/campaigns/social_housing/brick_by_brick_report_full"
+  },
+  "council_tax": {
+    "title": "Collection rates for Council Tax — ≈ £41bn collected (England, 2024-25)",
+    "publisher": "GOV.UK / MHCLG",
+    "published": "2025",
+    "licence": "Open Government Licence v3.0",
+    "url": "https://www.gov.uk/government/statistics/collection-rates-for-council-tax-and-non-domestic-rates-in-england-2024-to-2025/collection-rates-for-council-tax-and-non-domestic-rates-in-england-2024-to-2025"
+  },
   "commons_defence": {
     "title": "UK defence spending: £60.2bn in 2024-25",
     "publisher": "House of Commons Library",

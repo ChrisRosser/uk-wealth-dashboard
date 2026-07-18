@@ -93,6 +93,19 @@ export interface TaxData {
     totalHouseholdWealthGbp: number;
     note: string;
   };
+  wealthTax2pct: {
+    sourceId: string;
+    ratePct: number;
+    thresholdGbp: number;
+    revenueGbp: number;
+    peopleAffected: number;
+    millionairesSupportPct: number;
+    millionairesSourceId: string;
+    votersOpposePct: number;
+    pollSourceId: string;
+    migrationSourceId: string;
+    note: string;
+  };
   payFor: {
     taxCutPerPennyGbp: number;
     taxCutSourceId: string;
@@ -122,6 +135,12 @@ export interface TaxData {
     socialCareSourceId: string;
     homeGrantGbp: number;
     homeSourceId: string;
+    homePaybackSourceId: string;
+    childPovertyGbp: number;
+    childPovertyChildren: number;
+    childPovertySourceId: string;
+    sureStartGbp: number;
+    sureStartSourceId: string;
     defenceBudgetGbp: number;
     defenceSourceId: string;
     note: string;
